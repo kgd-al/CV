@@ -1,0 +1,113 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+
+% \usepackage[T1]{fontenc}
+% \usepackage{tgbonum}
+
+\usepackage{tikz}
+
+\usepackage{fullpage}
+\usepackage{array}
+
+\usepackage[margin=0mm, landscape]{geometry}
+
+\usepackage{hyperref}
+
+\usepackage{xcolor}
+
+\usepackage[backend=biber,maxcitenames=1,doi=false,isbn=false,url=false]{biblatex}
+\addbibresource{biblio.bib}
+
+\begin{document}
+\newcommand{\nsect}[5][]{
+ \node [#1] (#2) {
+  \begin{sect}{#3}{#5}
+    #4
+  \end{sect}
+ };
+}
+\newenvironment{sect}[2]{\begin{tabular}{m{#2}}\multicolumn{1}{c}{\large\textbf{#1}}\\}{\end{tabular}}
+
+\newcommand{\itm}[2]{\\\textbf{#1} - #2}
+
+\def\R{4}
+\thispagestyle{empty}
+
+\def\di{$\bullet$\ }
+\def\dii{\ $\circ$\ }
+
+% \begin{landscape}
+\begin{center}
+\frame{
+\begin{tikzpicture}[remember picture, overlay]
+ \node [rotate=55] (C) at (current page.center) {\includegraphics[width=\R cm]{phylogeny_allopatric_136963_7_all.pdf}};
+ 
+ \nsect[anchor=north west,at={(current page.north west)}]{PI}{\Large Kevin Godin-Dubois}{
+30 Chemin des maraichers, 31400 Toulouse \\
+05.67.06.93.91 - 06.18.72.09.06 \\
+\href{mailto:kevin.dubois@irit.fr}{kevin.dubois@irit.fr} \\
+\href{https://github.com/dubkois}{dubkois@github.com} \\
+ }{7.5cm}
+ 
+ \nsect[anchor=north east,at={(current page.north east)}]{Ed}{Education}{
+  \itm{2016-Present}{Capitole University, Toulouse} \\
+  PhD thesis, \emph{``Environment driven speciation''} \\
+  { \small Investigated how complexification of artificial creatures could be further enhanced by moving the control apparatus around the abiotic component of an ecosystem } \\
+
+  \itm{2014-2016}{Paul Sabatier University, Toulouse} \\
+  \emph{Master's degree in Computer Science} \\
+  {\small Artificial intelligence: mathematical models and training methods} \\
+  
+  \itm{2011-2014}{Paul Sabatier University, Toulouse} \\
+  \emph{Bachelor's degree in Computer Science}
+ }{16cm}
+ 
+ \nsect[anchor=10,at={(current page.east)}]{PE}{Professional Experience}{
+  \itm{2016-Present}{Teachings} \\
+  \di 2017 \& 2018, Capitole University, Toulouse \\
+  \dii L2 Course on Excel and Visual Basic for Applications \\
+  \dii L2 Course on Algorithms and Visual Basic \\
+  \di 2016 \& 2017, Paul Sabatier University \\
+  \dii L2 project monitoring on C programming \\
+  
+  \itm{2016}{Internship IRIT, France} \\
+  {\small \textsc{Toulouse Research Institute on Computer Science}} \\
+  \emph{``Rule-based artificial embryogenesis in a complex 3D environment''} \\
+  {\small \color{red} Not summarized (yet) } \\
+  \itm{2015}{Internship IRIT, France} \\
+  \emph{``Comparison of different evolutionary approaches, an application to the GECCO 2015 challenge''} \\
+  {\small Performed a comparison of performance (accuracy, efficiency) between Artificial Neural Networks and Genetic Regulatory Networks on the 2015 GECCO temperature prediction challenge data} \\
+ }{10cm}
+ 
+ \nsect[anchor=south east,at={(current page.south east)}]{PC}{Publications and Conferences}{
+  \di \fullcite{godindubois2019a} \\
+  \di Poster presentation ``Studying long term interactions between plants and their environment'' at The 2018 Conference on Artificial Life \\
+  \di \fullcite{dubois2017}
+ }{16cm}
+ 
+ \nsect[anchor=south west,at={(current page.south west)}]{Mi}{Miscellaneous}{
+  \\\textbf{Spoken Languages} \\
+  French (mother tongue) \\
+  English (fluent) \\
+  \\\textbf{Progamming Languages} \\
+  C++,C, \LaTeX, gnuplot \\
+  Python, Octave/Matlab \\
+  \\\textbf{Hobbies} \\
+  Tabletop RPG \\
+  Reading (Carlton Mellick III, Science Fiction, Medieval) \\
+  Music (Metal, Classical, Hard Rock, OSTs) \\
+  Video games (Construction, Puzzle, RPG)
+ }{9cm}
+ 
+ \draw [shift={(current page.center)}]
+   (0,0) -- (135:\R) -- (PI)
+     (135:.5*\R) arc (135:207-360:.5*\R) -- (207:\R) -- (Mi)
+     (135:.6*\R) arc (135:63:.6*\R) -- (63:\R) -- (Ed)
+       (63:.7*\R) arc (63:-9:.7*\R) -- (351:\R) -- (PE)
+         (351:.8*\R) arc (351:279:.8*\R) -- (279:\R) -- (PC)
+       ;
+\end{tikzpicture}
+}
+\end{center}
+% \end{landscape}
+\end{document}
