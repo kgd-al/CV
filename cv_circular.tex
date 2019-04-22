@@ -5,7 +5,7 @@
 % \usepackage{tgbonum}
 
 \usepackage{tikz}
-\usetikzlibrary{calc}
+\usetikzlibrary{calc,fadings,shadings}
 
 \usepackage{array}
 \usepackage{tabularx}
@@ -30,7 +30,7 @@
 \setlength{\innersep}{5pt}
 \tikzset{
  sect/.style={
-  draw,
+%   draw,
   inner sep=\innersep
  }
 }
@@ -51,6 +51,25 @@
 
 \def\di{$\bullet$\ }
 \def\dii{\ $\circ$\ }
+
+  \tikzfading[name=fade out,inner color=transparent!0,outer color=transparent!100]
+\def\sbcolor{red}
+\newcommand{\skillbar}[1]{
+ \begin{tikzpicture}
+  \def\sbx{0}
+  \def\sby{0}
+  \def\sbwA{.66\textwidth}
+  \pgfmathsetmacro{\sbwB}{#1 / 100 * .66\textwidth}
+  \def\sbh{.1cm}
+  \def\sbr{1.5pt}
+  
+  \draw [\sbcolor, rounded corners=\sbr] (\sbx,\sby) rectangle (\sbwA,\sbh);
+  \path [clip, rounded corners=\sbr] (\sbx,\sby) rectangle (\sbwB pt,\sbh);
+  \fill [\sbcolor] (\sbx,\sby) rectangle (\sbwB pt,\sbh); 
+  \fill [\sbcolor!50!black,path fading=fade out] (-\sbwB pt,\sby+\sbh) rectangle (\sbwB pt,-\sbh);
+  \fill [\sbcolor!20!white,path fading=fade out] (0,\sby+2*\sbh) rectangle (2*\sbwB pt,0);
+ \end{tikzpicture}
+}
 
 \begin{tikzpicture}[remember picture, overlay]
  \coordinate (west) at ($(current page.west)+(1in+\oddsidemargin,0)$);
@@ -136,19 +155,43 @@
  }{.6\textwidth}
  
  \nsect[anchor=south west, at={(south west)}]{CS}{Computing Skills}{
-  \begin{tabularx}{.32\textwidth}{c@{ }m{.1\textwidth}Xc@{ }m{.1\textwidth}}
-   \\
-   \faCogs & \textbf{Languages}         & & \faAlignJustify & \textbf{Redaction} \\
-    & C++                               & &  & \LaTeX \\
-    & C                                 & &  & Octave/Matlab \\
-    & Java                              & & \\
-    & Python                            & & \faLinux & \textbf{Systems} \\
-    &                                   & & & Linux \\
-   \faAreaChart & \textbf{Processing}   & & & Windows \\
-    & Gnuplot                           & & & Android \\
-    & Octave/Matlab                     & & \\
-  \end{tabularx}
- }{.335\textwidth}
+  \\
+  \begin{minipage}{.15\textwidth}
+   \begin{tabular}{c@{ }l}
+   \faCogs & \textbf{Languages} \\
+    & C++ \\[-.25cm]
+    & \skillbar{90} \\
+    & C, Java  \\[-.25cm]
+    & \skillbar{70} \\
+    & Python \\[-.25cm]
+    & \skillbar{60} \\
+    & \\
+   \faAreaChart & \textbf{Processing} \\
+    & Gnuplot \\[-.25cm]
+    & \skillbar{80} \\
+    & Octave/Matlab \\[-.25cm]
+    & \skillbar{70} \\
+
+   \end{tabular}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{.15\textwidth}
+   \begin{tabular}{c@{ }l}
+    \faAlignJustify & \textbf{Redaction} \\
+    & \LaTeX \\[-.2cm]
+    & \skillbar{80} \\
+    & Office Software \\[-.2cm]
+    & \skillbar{60} \\
+    \\
+    \faLinux & \textbf{Systems} \\
+    & Linux \\[-.25cm]
+    & \skillbar{80} \\
+    & Windows, Android \\[-.25cm]
+    & \skillbar{55} \\
+    \\
+   \end{tabular}   
+  \end{minipage}
+ }{.32\textwidth}
  
  \nsect[anchor=190,at={(west)}]{Mi}{Miscellaneous}{
   \\\textbf{Spoken Languages} \\
