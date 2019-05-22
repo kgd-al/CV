@@ -21,7 +21,7 @@
 \usepackage{fontawesome}
 
 \usepackage[backend=biber,maxcitenames=1,doi=false,isbn=false,url=false]{biblatex}
-\addbibresource{biblio.bib}
+\addbibresource{thesis.bib}
 
 \begin{document}
 \def\ifdrawguidelines{\iffalse}
@@ -71,20 +71,20 @@
  \end{tikzpicture}
 }
 
+\newcommand{\skilldisk}[1]{
+ \hspace{.5em}
+ \begin{tikzpicture}
+  \def\R{.15cm}
+  \shade[ball color = gray!40, opacity = 0.4] (0,0) circle (\R);
+  \pgfmathsetmacro\A{90-3.6*#1}
+  \shade[ball color = \sbcolor!40, opacity = 0.8] (0,\R) arc (90:\A:\R) -- (0,0) -- cycle;
+ \end{tikzpicture}
+}
+
+\def\skilllevel{\skilldisk}
+
 \begin{tikzpicture}[remember picture, overlay]
- \coordinate (west) at ($(current page.west)+(1in+\oddsidemargin,0)$);
- \coordinate (east) at ($(west)+(\textwidth, 0)$);
- \coordinate (north) at ($(current page.north)-(0,1in+\topmargin)$);
- \coordinate (south) at ($(north)-(0,\textheight)$);
- 
- \coordinate (north east) at (north-|east);
- \coordinate (north west) at (north-|west);
- \coordinate (south east) at (south-|east);
- \coordinate (south west) at (south-|west);
- 
- \coordinate (hcenter) at ($(east)!.5!(west)$);
- \coordinate (vcenter) at ($(north)!.5!(south)$);
- \coordinate (center) at ($(hcenter)!.5!(vcenter)$);
+ \node (page) at (current page.center) [minimum width=\textwidth, minimum height=\textheight] {};
  
  \ifdrawguidelines
   \foreach \a in {center, north, east, west, south, north east, north west, south west, south east} { \node [draw] at (\a) {\a}; }
@@ -97,12 +97,12 @@
  
  
  \def\angle{0}
- \foreach [count=\i] \n/\a in {\aPI/142, \aEd/-92, \aPE/-63, \aPC/-112, \aMi/-55} { \pgfmathsetmacro{\angle}{\angle+\a} \xdef\angle{\angle} \expandafter\xdef\n{\angle} }
+ \foreach \n/\a in {\aPI/142, \aEd/-92, \aPE/-63, \aPC/-75, \aCS/-55, \aMi/-55} { \pgfmathsetmacro{\angle}{\angle+\a} \xdef\angle{\angle} \expandafter\xdef\n{\angle} }
  
- \node [rotate=\aPI-80] (C) at (center) {\includegraphics[width=\R]{phylogeny_allopatric_136963_7_all.pdf}};
+ \node [rotate=\aPI-80] (C) at (page.center) {\includegraphics[width=\R]{phylogenetics}};
 
  \def\v{.2cm}
- \nsect[anchor=north west,at={(north west)}]{PI}{\Large Kevin Godin-Dubois}{
+ \nsect[anchor=north west,at={(page.north west)}]{PI}{\Large Kevin Godin-Dubois}{
   \addlinespace[\v]
   \multicolumn{1}{c}{\large \emph{A-Life researcher on cognition evolution}} \\
   \addlinespace[\v]
@@ -111,13 +111,13 @@
     & 31400 Toulouse, France & \faMobile & +33 6 18 72 09 06 \\
   \addlinespace[.1cm]
   \faEnvelopeO & \href{mailto:kevin.dubois@irit.fr}{kevin.dubois@irit.fr} && \\
-  \faGithub & \href{https://github.com/dubkois}{dubkois@github.com} && \\
+  \faGithub & \href{https://github.com/kgd-al}{kgd-al@github.com} && \\
   \faVimeo & \href{https://vimeo.com/godinduboisalife}{godinduboisalife@vimeo} && \\
-  \faRefresh & \href{https://github.com/dubkois/CV/raw/master/cv_circular.pdf}{Up-to date version} && \\
+  \faRefresh & \href{https://github.com/kgd-al/CV/raw/master/cv.pdf}{Up-to date version} && \\
   \end{tabular}
  }{.3\textwidth}
  
- \nsect[anchor=north east,at={(north east)}]{Ed}{Education}{
+ \nsect[anchor=north east,at={(page.35)}]{Ed}{Education}{
   \itm{2016-Present}{Capitole University, Toulouse} \\
   PhD thesis, \emph{``Environment driven speciation''} \\
   { \small Investigated how complexification of artificial creatures could be further enhanced by moving the control apparatus around the abiotic component of an ecosystem } \\
@@ -130,47 +130,49 @@
   \emph{Bachelor's degree in Computer Science}
  }{.6\textwidth}
  
- \nsect[anchor=10,at={(east)}]{PE}{Professional Experience}{
+ \nsect[anchor=north east, at={(page.17.5)}]{PE}{Professional Experience}{
   \itm{2016-Present}{Teachings} \\
   \di 2017 \& 2018, Capitole University, Toulouse \\
-  \dii L2 Course on Excel and Visual Basic for Applications \\
-  \dii L2 Course on Algorithms and Visual Basic \\
+  \dii L2 Excel and Visual Basic for Applications \\
+  \dii L2 Algorithms and Visual Basic \\
+  \dii L3 Modeling in Database \\
   \di 2016 \& 2017, Paul Sabatier University \\
   \dii L2 project monitoring on C programming \\
   
   \itm{2016}{Internship IRIT, France} \\
   {\small \textsc{Toulouse Research Institute on Computer Science}} \\
   \emph{``Rule-based artificial embryogenesis in a complex 3D environment''} \\
-  {\small \color{red} Not summarized (yet) } \\
+  {\small Deployed rule-based genomes on the MecaCell platform to study artificial plant growth and cell specialization.} \\
   \itm{2015}{Internship IRIT, France} \\
   \emph{``Comparison of different evolutionary approaches, an application to the GECCO 2015 challenge''} \\
-  {\small Performed a performance comparison (accuracy, efficiency) between Artificial Neural Networks and Genetic Regulatory Networks on the 2015 GECCO temperature prediction challenge data} \\
+  {\small Performed a performance comparison (accuracy, efficiency) between Artificial Neural Networks and Genetic Regulatory Networks on the 2015 GECCO temperature prediction challenge data.} \\
  }{.375\textwidth}
  
- \nsect[anchor=south east,at={(south east)}]{PC}{Publications and Conferences}{
+ \nsect[anchor=south west, at={(page.south west)}]{PC}{Publications and Conferences}{
   \\
-  \di \fullcite{godindubois2019a} \\
+  \di \fullcite{GodinDubois2019b} \\
+  \di \fullcite{GodinDubois2019a} \\
   \di Poster presentation ``Studying long term interactions between plants and their environment'' at The 2018 Conference on Artificial Life \\
-  \di \fullcite{dubois2017}
- }{.6\textwidth}
+  \di \fullcite{Dubois2017}
+ }{\textwidth}
  
- \nsect[anchor=south west, at={(south west)}]{CS}{Computing Skills}{
+ \nsect[anchor=west, at={(page.195)}]{CS}{Computing Skills}{
   \\
   \begin{minipage}{.15\textwidth}
    \begin{tabular}{c@{ }l}
    \faCogs & \textbf{Languages} \\
-    & C++ \\[-.25cm]
-    & \skillbar{90} \\
-    & C, Java  \\[-.25cm]
-    & \skillbar{70} \\
-    & Python \\[-.25cm]
-    & \skillbar{60} \\
+    \skilllevel{90}
+    & C++ \\
+    \skilllevel{80}
+    & C, Java  \\
+    \skilllevel{70}
+    & Python \\
     & \\
    \faAreaChart & \textbf{Processing} \\
-    & Gnuplot \\[-.25cm]
-    & \skillbar{80} \\
-    & Octave/Matlab \\[-.25cm]
-    & \skillbar{70} \\
+    \skilllevel{80} 
+    & Gnuplot \\
+    \skilllevel{70}
+    & Octave/Matlab \\
 
    \end{tabular}
   \end{minipage}
@@ -178,22 +180,22 @@
   \begin{minipage}{.15\textwidth}
    \begin{tabular}{c@{ }l}
     \faAlignJustify & \textbf{Redaction} \\
-    & \LaTeX \\[-.2cm]
-    & \skillbar{80} \\
-    & Office Software \\[-.2cm]
-    & \skillbar{60} \\
+    \skilllevel{80}
+    & \LaTeX \\
+    \skilllevel{60}
+    & Office Software \\
     \\
     \faLinux & \textbf{Systems} \\
-    & Linux \\[-.25cm]
-    & \skillbar{80} \\
-    & Windows, Android \\[-.25cm]
-    & \skillbar{55} \\
+    \skilllevel{80}
+    & Linux \\
+    \skilllevel{70}
+    & Windows, Android \\
     \\
    \end{tabular}   
   \end{minipage}
  }{.32\textwidth}
  
- \nsect[anchor=190,at={(west)}]{Mi}{Miscellaneous}{
+ \nsect[anchor=west,at={(page.172.5)}]{Mi}{Miscellaneous}{
   \\\textbf{Spoken Languages} \\
   French (mother tongue) \\
   English (fluent) \\
@@ -205,12 +207,13 @@
  }{.35\textwidth}
  
   
- \draw [shift={(center)}]
+ \draw [shift={(page.center)}]
    (0,0) -- (\aPI:\R) -- (PI)
      (\aPI:.5*\R) arc (\aPI:\aMi:.5*\R) -- (\aMi:\R) -- (Mi)
      (\aPI:.6*\R) arc (\aPI:\aEd:.6*\R) -- (\aEd:\R) -- (Ed)
        (\aEd:.7*\R) arc (\aEd:\aPE:.7*\R) -- (\aPE:\R) -- (PE)
-         (\aPE:.8*\R) arc (\aPE:\aPC:.8*\R) -- (\aPC:\R) -- (PC)
+         (\aPE:.8*\R) arc (\aPE:\aCS:.8*\R) -- (\aCS:\R) -- (CS)
+         (\aPE:.9*\R) arc (\aPE:\aPC:.9*\R) -- (\aPC:\R) -- (PC)
        ;
 
 \end{tikzpicture}
