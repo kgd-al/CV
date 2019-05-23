@@ -78,9 +78,9 @@
  \hspace{.5em}
  \begin{tikzpicture}
   \def\R{.15cm}
-  \shade[ball color = gray!40, opacity = 0.4] (0,0) circle (\R);
+  \shade[ball color = gray, opacity = 0.4] (0,0) circle (\R);
   \pgfmathsetmacro\A{90-3.6*#1}
-  \shade[ball color = \sbcolor!40, opacity = 0.8] (0,\R) arc (90:\A:\R) -- (0,0) -- cycle;
+  \shade[ball color = \sbcolor!40, opacity = 1] (0,\R) arc (90:\A:\R) -- (0,0) -- cycle;
  \end{tikzpicture}
 }
 
@@ -101,7 +101,7 @@
  
  \def\angle{0}
  \def\aPhase{82.5}
- \foreach \n/\a in {\aPI/144, \aEd/-92, \aPE/-63, \aPC/-75, \aCS/-55, \aMi/-55} { \pgfmathsetmacro{\angle}{\angle+\a} \xdef\angle{\angle} \expandafter\xdef\n{\angle} }
+ \foreach \n/\a in {\aPI/143.5, \aEd/-88.5, \aPE/-61, \aPC/-84, \aCS/-68.5, \aMi/-34} { \pgfmathsetmacro{\angle}{\angle+\a} \xdef\angle{\angle} \expandafter\xdef\n{\angle} }
  
  \node [rotate=\aPI-\aPhase] (C) at (page.center) {\includegraphics[width=\R]{phylogenetics}};
 
@@ -229,7 +229,7 @@
        ;
 
 %   \foreach \a/\n in {\aPI/PI, \aEd/Ed, \aPE/PE, \aPC/PC, \aCS/CS, \aMi/Mi} {
-%    \draw [shift={(page.center)},red] (\a:\R) -- (\n);
+%    \draw [green, line width=.25pt] (page.center) -- (\n);
 %   }
 
 %   \message{^^Jangles:}
