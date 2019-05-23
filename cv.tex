@@ -103,7 +103,7 @@
  \def\aPhase{82.5}
  \foreach \n/\a in {\aPI/144, \aEd/-92, \aPE/-63, \aPC/-75, \aCS/-55, \aMi/-55} { \pgfmathsetmacro{\angle}{\angle+\a} \xdef\angle{\angle} \expandafter\xdef\n{\angle} }
  
- \node [rotate=\aPI-\aPhase] (C) at (page.center) {\includegraphics[width=\R]{phylogenetics}};
+ \node [rotate=\aPI-\aPhase] (C) at (page.center) {\includegraphics[width=\D]{phylogenetics}};
 
  \def\v{.2cm}
  \nsect[anchor=north west,at={(page.north west)}]{PI}{\Large Kevin Godin-Dubois}{
@@ -219,7 +219,7 @@
  }{.35\textwidth}
  
   
- \draw [shift={(page.center)}]
+ \draw [shift={(page.center)}, line width=.125pt]
    (0,0) -- (\aPI:\R) -- (PI)
      (\aPI:.6*\R) arc (\aPI:\aMi:.6*\R) -- (\aMi:\R) -- (Mi)
      (\aPI:.7*\R) arc (\aPI:\aEd:.7*\R) -- (\aEd:\R) -- (Ed)
@@ -232,11 +232,11 @@
 %    \draw [shift={(page.center)},red] (\a:\R) -- (\n);
 %   }
 
-%   \message{^^Jangles:}
-%   \foreach \a in {\aPI, \aEd, \aPE, \aPC, \aCS, \aMi} {
-%    \pgfmathsetmacro\A{round((\aPI-\a) / (360-15) * 691)}
-%    \message{\A }
-%   }
+  \message{^^Jangles:}
+  \foreach \a in {\aPI, \aEd, \aPE, \aPC, \aCS, \aMi} {
+   \pgfmathsetmacro\A{(\aPI-\a) / (360-15)}
+   \message{\A }
+  }
 %   jq '.tree | recurse(.children | reverse | .[]) | .id' phylogeny.ptree.json
   
 \end{tikzpicture}
