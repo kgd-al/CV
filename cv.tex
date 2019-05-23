@@ -46,7 +46,8 @@
 
 \newcommand{\itm}[2]{\\\textbf{#1} - #2}
 
-\def\R{.12\textwidth}
+\pgfmathsetlengthmacro\D{.2*\textwidth}
+\pgfmathsetlengthmacro{\R}{.5*\D}
 \thispagestyle{empty}
 
 \def\di{$\bullet$\ }
@@ -97,9 +98,9 @@
  
  
  \def\angle{0}
- \foreach \n/\a in {\aPI/142, \aEd/-92, \aPE/-63, \aPC/-75, \aCS/-55, \aMi/-55} { \pgfmathsetmacro{\angle}{\angle+\a} \xdef\angle{\angle} \expandafter\xdef\n{\angle} }
+ \foreach \n/\a in {\aPI/144, \aEd/-92, \aPE/-63, \aPC/-75, \aCS/-55, \aMi/-55} { \pgfmathsetmacro{\angle}{\angle+\a} \xdef\angle{\angle} \expandafter\xdef\n{\angle} }
  
- \node [rotate=\aPI-80] (C) at (page.center) {\includegraphics[width=\R]{phylogenetics}};
+ \node [rotate=\aPI-82.5] (C) at (page.center) {\includegraphics[width=\D]{phylogenetics}};
 
  \def\v{.2cm}
  \nsect[anchor=north west,at={(page.north west)}]{PI}{\Large Kevin Godin-Dubois}{
@@ -145,8 +146,8 @@
   {\small Deployed rule-based genomes on the MecaCell platform to study artificial plant growth and cell specialization.} \\
   \itm{2015}{Internship IRIT, France} \\
   \emph{``Comparison of different evolutionary approaches, an application to the GECCO 2015 challenge''} \\
-  {\small Performed a performance comparison (accuracy, efficiency) between Artificial Neural Networks and Genetic Regulatory Networks on the 2015 GECCO temperature prediction challenge data.} \\
- }{.375\textwidth}
+  {\small Performed a performance comparison (accuracy, efficiency) between Artificial Neural and Genetic Regulatory Networks on the 2015 GECCO temperature prediction challenge data.} \\
+ }{.35\textwidth}
  
  \nsect[anchor=south west, at={(page.south west)}]{PC}{Publications and Conferences}{
   \\
@@ -207,14 +208,17 @@
  }{.35\textwidth}
  
   
- \draw [shift={(page.center)}]
+ \draw [shift={(page.center)}, ultra thin]
    (0,0) -- (\aPI:\R) -- (PI)
-     (\aPI:.5*\R) arc (\aPI:\aMi:.5*\R) -- (\aMi:\R) -- (Mi)
-     (\aPI:.6*\R) arc (\aPI:\aEd:.6*\R) -- (\aEd:\R) -- (Ed)
-       (\aEd:.7*\R) arc (\aEd:\aPE:.7*\R) -- (\aPE:\R) -- (PE)
-         (\aPE:.8*\R) arc (\aPE:\aCS:.8*\R) -- (\aCS:\R) -- (CS)
-         (\aPE:.9*\R) arc (\aPE:\aPC:.9*\R) -- (\aPC:\R) -- (PC)
+%      (\aPI:.3*\R) arc (\aPI:\aMi:.3*\R) -- (\aMi:\R) -- (Mi)
+%      (\aPI:.45*\R) arc (\aPI:\aEd:.45*\R) -- (\aEd:\R) -- (Ed)
+%        (\aEd:.6*\R) arc (\aEd:\aPE:.6*\R) -- (\aPE:\R) -- (PE)
+%          (\aPE:.75*\R) arc (\aPE:\aCS:.75*\R) -- (\aCS:\R) -- (CS)
+%          (\aPE:.9*\R) arc (\aPE:\aPC:.9*\R) -- (\aPC:\R) -- (PC)
        ;
+       
+  \def\d{.05}
+  \draw [red,shift={(page.center)}] (\aPI:.175*\R) circle (\d) circle (\d pt);
 
 \end{tikzpicture}
 \end{document}
