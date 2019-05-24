@@ -1,28 +1,33 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\iftrue
 \usepackage[french]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{csquotes}
+\def\Title{Publications en date du}
+\else
+\def\Title{Publications as of}
+\fi
 \usepackage{array}
 \usepackage[backend=biber,maxcitenames=1]{biblatex}
 \addbibresource{thesis.bib}
+\newcommand{\docite}[1]{$\bullet$ \fullcite{#1}}
 \begin{document}
 \begingroup
  \centering 
  \vspace*{\baselineskip} 
- {\LARGE Publications en date du \today}
-%  {\LARGE Publications as of \today}
+ {\LARGE \Title\ \today}
  \vspace*{1\baselineskip}
 \endgroup
 
 \renewcommand{\arraystretch}{1.2}
 \setlength{\tabcolsep}{0pt}
 \begin{tabular}{m{.95\textwidth}}
-\\\textbf{2019} \\
-\fullcite{GodinDubois2019b} \\
-\fullcite{GodinDubois2019a} \\
+ \\\textbf{2019} \\
+ \docite{GodinDubois2019b} \\
+ \docite{GodinDubois2019a} \\
 
-\\\textbf{2017} \\
-\fullcite{Dubois2017}
+ \\\textbf{2017} \\
+ \docite{Dubois2017}
 \end{tabular}
 \end{document}
