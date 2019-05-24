@@ -101,8 +101,10 @@
  
  \def\angle{0}
  \def\aPhase{82.5}
- \foreach \n/\a in {\aPI/144, \aEd/-92, \aPE/-63, \aPC/-75, \aCS/-55, \aMi/-55} { \pgfmathsetmacro{\angle}{\angle+\a} \xdef\angle{\angle} \expandafter\xdef\n{\angle} }
- 
+ \foreach \n/\a in {\aPI/143.5, \aEd/-88.5, \aPE/-61, \aPC/-84, \aCS/-68.5, \aMi/-34} {
+  \pgfmathsetmacro{\angle}{\angle+\a} \xdef\angle{\angle} \expandafter\xdef\n{\angle}
+ }
+
  \node [rotate=\aPI-\aPhase] (C) at (page.center) {\includegraphics[width=\D]{phylogenetics}};
 
  \def\v{.2cm}
@@ -126,7 +128,8 @@
    \begin{tabular}{m{\textwidth}}
     \itm{2016-Present}{Capitole University, Toulouse} \\
     PhD thesis, \emph{``Environment driven speciation''} \\
-    { \small Investigated how complexification of artificial creatures could be further enhanced by moving the control apparatus around the abiotic component of an ecosystem }
+    { \small Investigated how complexification of artificial creatures could be further enhanced by moving the control apparatus around the abiotic component of an ecosystem } \\
+    \\
    \end{tabular}
   \end{minipage}
   \hfill
@@ -219,25 +222,18 @@
  }{.35\textwidth}
  
   
- \draw [shift={(page.center)}, line width=.125pt]
-   (0,0) -- (\aPI:\R) -- (PI)
-     (\aPI:.6*\R) arc (\aPI:\aMi:.6*\R) -- (\aMi:\R) -- (Mi)
-     (\aPI:.7*\R) arc (\aPI:\aEd:.7*\R) -- (\aEd:\R) -- (Ed)
-       (\aEd:.8*\R) arc (\aEd:\aPE:.8*\R) -- (\aPE:\R) -- (PE)
-         (\aPE:.9*\R) arc (\aPE:\aCS:.9*\R) -- (\aCS:\R) -- (CS)
-         (\aPE:\R) arc (\aPE:\aPC:\R) -- (\aPC:\R) -- (PC)
-       ;
+%  \draw [shift={(page.center)}, line width=.125pt]
+%    (0,0) -- (\aPI:\R) -- (PI)
+%      (\aPI:.6*\R) arc (\aPI:\aMi:.6*\R) -- (\aMi:\R) -- (Mi)
+%      (\aPI:.7*\R) arc (\aPI:\aEd:.7*\R) -- (\aEd:\R) -- (Ed)
+%        (\aEd:.8*\R) arc (\aEd:\aPE:.8*\R) -- (\aPE:\R) -- (PE)
+%          (\aPE:.9*\R) arc (\aPE:\aCS:.9*\R) -- (\aCS:\R) -- (CS)
+%          (\aPE:\R) arc (\aPE:\aPC:\R) -- (\aPC:\R) -- (PC)
+%        ;
 
-%   \foreach \a/\n in {\aPI/PI, \aEd/Ed, \aPE/PE, \aPC/PC, \aCS/CS, \aMi/Mi} {
-%    \draw [shift={(page.center)},red] (\a:\R) -- (\n);
-%   }
-
-  \message{^^Jangles:}
-  \foreach \a in {\aPI, \aEd, \aPE, \aPC, \aCS, \aMi} {
-   \pgfmathsetmacro\A{(\aPI-\a) / (360-15)}
-   \message{\A }
+  \foreach \a/\n/\r in {\aPI/PI/.2, \aEd/Ed/.89, \aPE/PE/.94, \aPC/PC/.62, \aCS/CS/.57, \aMi/Mi/.3} {
+   \draw [shift={(page.center)}, gray, line width=.25pt] (\a:\r * \R) -- (\a:\R) -- (\n);
   }
-%   jq '.tree | recurse(.children | reverse | .[]) | .id' phylogeny.ptree.json
-  
+
 \end{tikzpicture}
 \end{document}
