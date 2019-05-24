@@ -1,0 +1,28 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{csquotes}
+\usepackage{array}
+\usepackage[backend=biber,maxcitenames=1]{biblatex}
+\addbibresource{thesis.bib}
+\begin{document}
+\begingroup
+ \centering 
+ \vspace*{\baselineskip} 
+ {\LARGE Publications en date du \today}
+%  {\LARGE Publications as of \today}
+ \vspace*{1\baselineskip}
+\endgroup
+
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{0pt}
+\begin{tabular}{m{.95\textwidth}}
+\\\textbf{2019} \\
+\fullcite{GodinDubois2019b} \\
+\fullcite{GodinDubois2019a} \\
+
+\\\textbf{2017} \\
+\fullcite{Dubois2017}
+\end{tabular}
+\end{document}
