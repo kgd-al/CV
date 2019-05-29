@@ -23,6 +23,16 @@
 \usepackage[backend=biber,maxcitenames=1,doi=false,isbn=false,url=false]{biblatex}
 \addbibresource{thesis.bib}
 
+\title{CV - Kevin Godin-Dubois}
+\makeatletter
+\hypersetup{
+ pdfinfo={
+  Author={Kevin Godin-Dubois},
+  Title={\@title}
+ }
+}
+\makeatother
+
 \begin{document}
 \def\ifdrawguidelines{\iffalse}
 
@@ -112,16 +122,17 @@
   \addlinespace[\v]
   \multicolumn{1}{c}{\large \emph{A-Life researcher on cognition evolution}} \\
   \addlinespace[\v]
-  \begin{tabular}{c@{ }m{.158\textwidth}c@{ }m{.096\textwidth}}
+  \begin{tabular}{c@{ }m{.158\textwidth}c@{ }m{.158\textwidth}}
    \faHome & 30 Chemin des maraichers & \faPhone & +33 5 67 06 93 91 \\
-    & 31400 Toulouse, France & \faMobile & +33 6 18 72 09 06 \\
+    & Bat. G1, Apt. 177 & \faMobile & +33 6 18 72 09 06 \\
+    & 31400 Toulouse, France & \\
   \addlinespace[.1cm]
-  \faEnvelopeO & \href{mailto:kevin.dubois@irit.fr}{kevin.dubois@irit.fr} && \\
-  \faGithub & \href{https://github.com/kgd-al}{kgd-al@github.com} && \\
-  \faVimeo & \href{https://vimeo.com/godinduboisalife}{godinduboisalife@vimeo} && \\
-  \faRefresh & \href{https://github.com/kgd-al/CV/raw/master/cv.pdf}{Up-to date version} && \\
+  \faEnvelopeO & \href{mailto:kevin.dubois@irit.fr}{kevin.dubois@irit.fr} &
+  \faVimeo & \href{https://vimeo.com/godinduboisalife}{godinduboisalife@vimeo} \\
+  \faGithub & \href{https://github.com/kgd-al}{kgd-al@github.com} &
+  \faRefresh & \href{https://github.com/kgd-al/CV/raw/master/cv.pdf}{Up-to date version} \\
   \end{tabular}
- }{.3\textwidth}
+ }{.35\textwidth}
  
  \nsect[anchor=north east,at={(page.35)}]{Ed}{Education}{
   \begin{minipage}{.275\textwidth}
@@ -195,8 +206,8 @@
   \begin{minipage}{.15\textwidth}
    \begin{tabular}{c@{ }l}
     \faAlignJustify & \textbf{Redaction} \\
-    \skilllevel{80}
-    & \LaTeX \\
+    \skilllevel{85}
+    & \LaTeX / Ti\textit{k}Z\\
     \skilllevel{60}
     & Office Software \\
     \\
