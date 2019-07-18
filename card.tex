@@ -1,63 +1,88 @@
 \documentclass{article}
 
 \usepackage{tikz}
-\usetikzlibrary{calc,fadings,positioning}
+\usetikzlibrary{calc,decorations.text,fadings,positioning}
 
 \usepackage[paperwidth=88.0mm,paperheight=58.0mm,margin=3.3mm,noheadfoot]{geometry}
 
+\usepackage[hidelinks]{hyperref}
 \usepackage{qrcode}
 
 \usepackage{fontawesome}
 
 \usepackage{booktabs}
 
-\begin{document}
- \thispagestyle{empty}
- \fontfamily{pcr}
- \def\bannerheight{.1\paperheight}
- \newcommand{\qrc}[2]{%
-  \begingroup%
-   \setlength{\tabcolsep}{0pt}%
-   \begin{tabular}{cc}%
-    \qrcode[hyperlink,height=.15\textheight]{https://#2}%
-    & #1 \\%
-    \multicolumn{2}{c}{\tiny#2} \\
-   \end{tabular}%
-  \endgroup
- }
+\def\name{Kevin Godin-Dubois}
+\def\subtitle{Researcher on Cognition Emergence}
 
- \begin{tikzpicture}[remember picture, overlay, every node/.style={draw}]
-  \node at (current page.center) [minimum width=\paperwidth, minimum height=\paperheight, fill=black] {};
-  \node (page) at (current page.center) [minimum width=\textwidth, minimum height=\textheight, fill=white] {};
+\begin{document}
+
+\pagestyle{empty}
+\fontfamily{pcr}
+
+\newcommand{\fullpage}[1][]{
+ \node (fullpage) at (current page.center) [minimum width=\paperwidth, minimum height=\paperheight, #1] {};
+}
+\newcommand{\textarea}[1][]{
+ \node (textarea) at (current page.center) [minimum width=\textwidth, minimum height=\textheight, #1] {};
+}
+
+\begin{tikzpicture}[remember picture, overlay, every node/.style={}]
+ \fullpage[fill=black]
+ \textarea
+
+ \node (P) at (textarea.center) [inner sep=0pt] {\includegraphics[height=.8\textheight]{annexes/phylogenetics_colored.pdf}};
+
+ \def\myshift#1{\raisebox{.5ex}}
+ \draw [ultra thick,postaction={decorate,decoration={text along path,text align=center,text={|\color{white}\Large\bfseries\myshift|\name}}}] (P.west) arc (180:0:.4\textheight);
+ \def\myshift#1{\raisebox{-1.75ex}}
+ \draw [ultra thick,postaction={decorate,decoration={text along path,text align=center,text={|\color{white}\itshape\small\myshift|\subtitle}}}] (P.west) arc (180:360:.4\textheight);
+  
+%   \node [below=.75cm of KGD] {
+%    \scriptsize\setlength{\tabcolsep}{1pt}
+%    \begin{tabular}{@{}cl@{ }cl@{}}
+%          \faHome & University of Toulouse &
+%         \faPhone & +33 5 67 06 93 91 \\
+%                  & IRIT - CNRS UMR 5505 &
+%        \faMobile & +33 6 18 72 09 06 \\
+% %                  & \multicolumn{3}{l}{2 rue du Doyen Gabriel Marty} \\
+% %                  & 31042 Toulouse, France & \\
+%     \addlinespace[.05\textheight]
+%     \faEnvelopeO & kevin.dubois@irit.fr & 
+%    \end{tabular}
+%   };
+  
+\end{tikzpicture}
+
+\newpage
+
+\newcommand{\qrc}[4][]{%
+ \node [#1] (#2qrcode) {\qrcode[hyperlink, height=.2\textheight, version=6]{https://#4}};
+ \node [above=0 of #2qrcode, inner sep=0pt] (#2logo) {\includegraphics[height=.05\textheight]{annexes/#2_Logo}};
+ \node [below=0 of #2qrcode, inner sep=0pt] (#2text) {\tiny #3};
+}
+\begin{tikzpicture}[remember picture, overlay, every node/.style={}]
+ \fullpage[fill=black]
+ \textarea[fill=white]
+  
+ \node (KGD) [below=0 of textarea.north] {\Large\textbf \name};
+  
+ \node (I) at ($(KGD.south)!.45!(textarea.center)$) {
+  \begin{tabular}{c}
+   PHD Student (3$^{rd}$ year)\\
+   University of Toulouse \\
+   REVA Team | IRIT - CNRS \\
+  \end{tabular}
+ };
+
+ \coordinate (C) at ($(textarea.center)-(0,.1cm)$);
+ \node [right=.1 of textarea.west|-C] {\footnotesize\faEnvelopeO \ \href{mailto:kevin.dubois@irit.fr}{kevin.dubois@irit.fr}};
+ \node [left=.1 of textarea.east|-C] {\footnotesize\faMobile \ +33 6 18 72 09 06};
  
-  \begin{tikzfadingfrompicture}[name=fade bottom]
-   \shade[top color=transparent!0,
-          bottom color=transparent!100] (0,0) rectangle (2,2);
-  \end{tikzfadingfrompicture}
-  \fill[path fading=fade bottom, black!90!white] (page.north west) rectangle ++(\textwidth, -\bannerheight);
-  
-  \node (KGD) at (page.north) [anchor=north] {\Large Kevin Godin-Dubois};
-  \node [below=0 of KGD] {\itshape Researcher on Cognition Evolution};
-  
-  \node [left=0 of KGD, inner sep=0pt, rotate=90, anchor=south] {\includegraphics[height=.1\textheight]{phylogenetics}};
-  \node [right=0 of KGD, inner sep=0pt, rotate=-90, anchor=south] {\includegraphics[height=.1\textheight]{phylogenetics}};
-  
-  \node [below=.75cm of KGD] {
-   \scriptsize\setlength{\tabcolsep}{1pt}
-   \begin{tabular}{@{}cl@{ }cl@{}}
-         \faHome & University of Toulouse &
-        \faPhone & +33 5 67 06 93 91 \\
-                 & IRIT - CNRS UMR 5505 &
-       \faMobile & +33 6 18 72 09 06 \\
-                 & \multicolumn{3}{l}{2 rue du Doyen Gabriel Marty} \\
-                 & 31042 Toulouse, France & \\
-    \addlinespace[.05\textheight]
-    \faEnvelopeO & kevin.dubois@irit.fr & 
-   \end{tabular}
-  };
-  
-  \node [above right=0 of page.south west] {\qrc{\faVimeo}{vimeo.com/godinduboisalife}};
-  \node [above=0 of page.south] {\qrc{$R^G$}{ResearchGate}};
-  \node [above left=0 of page.south east] {\qrc{\faGithub}{github.com/kgd-al}};
- \end{tikzpicture}
+ \def\off{.35cm}
+ \qrc[above right=\off and \off of textarea.south west]{Vimeo}{godinduboisalife}{vimeo.com/godinduboisalife};
+ \qrc[above=\off of textarea.south]{ResearchGate}{Kevin\_Godin-Dubois2}{www.researchgate.net/profile/Kevin_Godin-Dubois2};
+ \qrc[above left=\off and \off of textarea.south east]{GitHub}{kgd-al}{github.com/kgd-al};
+\end{tikzpicture}
+
 \end{document}
