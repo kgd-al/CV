@@ -1,0 +1,63 @@
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{calc,fadings,positioning}
+
+\usepackage[paperwidth=88.0mm,paperheight=58.0mm,margin=3.3mm,noheadfoot]{geometry}
+
+\usepackage{qrcode}
+
+\usepackage{fontawesome}
+
+\usepackage{booktabs}
+
+\begin{document}
+ \thispagestyle{empty}
+ \fontfamily{pcr}
+ \def\bannerheight{.1\paperheight}
+ \newcommand{\qrc}[2]{%
+  \begingroup%
+   \setlength{\tabcolsep}{0pt}%
+   \begin{tabular}{cc}%
+    \qrcode[hyperlink,height=.15\textheight]{https://#2}%
+    & #1 \\%
+    \multicolumn{2}{c}{\tiny#2} \\
+   \end{tabular}%
+  \endgroup
+ }
+
+ \begin{tikzpicture}[remember picture, overlay, every node/.style={draw}]
+  \node at (current page.center) [minimum width=\paperwidth, minimum height=\paperheight, fill=black] {};
+  \node (page) at (current page.center) [minimum width=\textwidth, minimum height=\textheight, fill=white] {};
+ 
+  \begin{tikzfadingfrompicture}[name=fade bottom]
+   \shade[top color=transparent!0,
+          bottom color=transparent!100] (0,0) rectangle (2,2);
+  \end{tikzfadingfrompicture}
+  \fill[path fading=fade bottom, black!90!white] (page.north west) rectangle ++(\textwidth, -\bannerheight);
+  
+  \node (KGD) at (page.north) [anchor=north] {\Large Kevin Godin-Dubois};
+  \node [below=0 of KGD] {\itshape Researcher on Cognition Evolution};
+  
+  \node [left=0 of KGD, inner sep=0pt, rotate=90, anchor=south] {\includegraphics[height=.1\textheight]{phylogenetics}};
+  \node [right=0 of KGD, inner sep=0pt, rotate=-90, anchor=south] {\includegraphics[height=.1\textheight]{phylogenetics}};
+  
+  \node [below=.75cm of KGD] {
+   \scriptsize\setlength{\tabcolsep}{1pt}
+   \begin{tabular}{@{}cl@{ }cl@{}}
+         \faHome & University of Toulouse &
+        \faPhone & +33 5 67 06 93 91 \\
+                 & IRIT - CNRS UMR 5505 &
+       \faMobile & +33 6 18 72 09 06 \\
+                 & \multicolumn{3}{l}{2 rue du Doyen Gabriel Marty} \\
+                 & 31042 Toulouse, France & \\
+    \addlinespace[.05\textheight]
+    \faEnvelopeO & kevin.dubois@irit.fr & 
+   \end{tabular}
+  };
+  
+  \node [above right=0 of page.south west] {\qrc{\faVimeo}{vimeo.com/godinduboisalife}};
+  \node [above=0 of page.south] {\qrc{$R^G$}{ResearchGate}};
+  \node [above left=0 of page.south east] {\qrc{\faGithub}{github.com/kgd-al}};
+ \end{tikzpicture}
+\end{document}
