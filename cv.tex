@@ -23,6 +23,16 @@
 \usepackage[backend=biber,maxcitenames=1,doi=false,isbn=false,url=false]{biblatex}
 \addbibresource{thesis.bib}
 
+\title{CV - Kevin Godin-Dubois}
+\makeatletter
+\hypersetup{
+ pdfinfo={
+  Author={Kevin Godin-Dubois},
+  Title={\@title}
+ }
+}
+\makeatother
+
 \begin{document}
 \def\ifdrawguidelines{\iffalse}
 
@@ -51,6 +61,8 @@
 \pgfmathsetlengthmacro\D{.2*\textwidth}
 \pgfmathsetlengthmacro{\R}{.5*\D}
 \thispagestyle{empty}
+
+\setlength\parindent{24pt}
 
 \def\di{$\bullet$\ }
 \def\dii{\ $\circ$\ }
@@ -105,7 +117,7 @@
   \pgfmathsetmacro{\angle}{\angle+\a} \xdef\angle{\angle} \expandafter\xdef\n{\angle}
  }
 
- \node [rotate=\aPI-\aPhase] (C) at (page.center) {\includegraphics[width=\D]{phylogenetics}};
+ \node [rotate=\aPI-\aPhase] (C) at (page.center) {\includegraphics[width=\D]{annexes/phylogenetics_monochrome}};
 
  \def\v{.2cm}
  \nsect[anchor=north west,at={(page.north west)}]{PI}{\Large Kevin Godin-Dubois}{
@@ -123,7 +135,7 @@
       \faGithub & \href{https://github.com/kgd-al}{kgd-al@github.com} &
      \faRefresh & \href{https://github.com/kgd-al/CV/raw/master/cv.pdf}{Up-to date version} \\
   \end{tabular}
- }{.31\textwidth}
+ }{.32\textwidth}
  
  \nsect[anchor=north east,at={(page.35)}]{Ed}{Education}{
   \begin{minipage}{.275\textwidth}
@@ -139,7 +151,7 @@
    \begin{tabular}{m{\textwidth}}
     \itm{2014-2016}{Paul Sabatier University, Toulouse} \\
     \emph{Master's degree in Computer Science} \\
-    {\small Artificial intelligence: mathematical models and training methods} \\
+    {\small Artificial intelligence: mathematical and symbolic models, training methods} \\
   
     \itm{2011-2014}{Paul Sabatier University, Toulouse} \\
     \emph{Bachelor's degree in Computer Science}
@@ -197,8 +209,8 @@
   \begin{minipage}{.15\textwidth}
    \begin{tabular}{c@{ }l}
     \faAlignJustify & \textbf{Redaction} \\
-    \skilllevel{80}
-    & \LaTeX \\
+    \skilllevel{85}
+    & \LaTeX / Ti\textit{k}Z\\
     \skilllevel{60}
     & Office Software \\
     \\
