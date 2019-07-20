@@ -1,9 +1,11 @@
 \documentclass{article}
 
+% \PassOptionsToPackage{cmyk}{xcolor}
+
 \usepackage{tikz}
 \usetikzlibrary{calc,decorations.text,fadings,positioning}
 
-\usepackage[paperwidth=88.0mm,paperheight=58.0mm,margin=3.3mm,noheadfoot]{geometry}
+\usepackage[paperwidth=91.0mm,paperheight=61.0mm,margin=7.0mm,noheadfoot]{geometry}
 
 \usepackage[hidelinks]{hyperref}
 \usepackage{qrcode}
@@ -27,16 +29,20 @@
  \node (textarea) at (current page.center) [minimum width=\textwidth, minimum height=\textheight, #1] {};
 }
 
-\begin{tikzpicture}[remember picture, overlay, every node/.style={}]
- \fullpage[fill=black]
+\definecolor{cmykblack}{cmyk}{.6,.4,.4,1}
+% \definecolor{cmykblack}{cmyk}{1,0,0,0}
+\definecolor{cmykwhite}{cmyk}{0,0,0,0}
+
+\begin{tikzpicture}[remember picture, overlay, every node/.style={text=cmykblack}]
+ \fullpage[fill=cmykblack]
  \textarea
 
  \node (P) at (textarea.center) [inner sep=0pt] {\includegraphics[height=.8\textheight]{annexes/phylogenetics_colored.pdf}};
 
  \def\myshift#1{\raisebox{.5ex}}
- \draw [ultra thick,postaction={decorate,decoration={text along path,text align=center,text={|\color{white}\Large\bfseries\myshift|\name}}}] (P.west) arc (180:0:.4\textheight);
+ \path [postaction={decorate,decoration={text along path,text align=center,text={|\color{cmykwhite}\Large\bfseries\myshift|\name}}}] (P.west) arc (180:0:.4\textheight);
  \def\myshift#1{\raisebox{-1.75ex}}
- \draw [ultra thick,postaction={decorate,decoration={text along path,text align=center,text={|\color{white}\itshape\small\myshift|\subtitle}}}] (P.west) arc (180:360:.4\textheight);
+ \path [postaction={decorate,decoration={text along path,text align=center,text={|\color{cmykwhite}\itshape\footnotesize\myshift|\subtitle}}}] (P.west) arc (180:360:.4\textheight);
   
 %   \node [below=.75cm of KGD] {
 %    \scriptsize\setlength{\tabcolsep}{1pt}
@@ -51,7 +57,11 @@
 %     \faEnvelopeO & kevin.dubois@irit.fr & 
 %    \end{tabular}
 %   };
-  
+%  \draw [red] (fullpage.south west) rectangle (fullpage.north east);
+%  \draw [red] ($(fullpage.south west)+(3mm,3mm)$) rectangle ($(fullpage.north east)-(3mm,3mm)$);
+%  \draw [red] ($(fullpage.south west)+(7mm,7mm)$) rectangle ($(fullpage.north east)-(7mm,7mm)$);
+%  
+
 \end{tikzpicture}
 
 \newpage
@@ -61,9 +71,12 @@
  \node [above=0 of #2qrcode, inner sep=0pt] (#2logo) {\includegraphics[height=.05\textheight]{annexes/#2_Logo}};
  \node [below=0 of #2qrcode, inner sep=0pt] (#2text) {\tiny #3};
 }
-\begin{tikzpicture}[remember picture, overlay, every node/.style={}]
- \fullpage[fill=black]
- \textarea[fill=white]
+\begin{tikzpicture}[remember picture, overlay, every node/.style={text=cmykblack}]
+ \fullpage
+ \textarea
+  
+%  \fill [cmykblack] (fullpage.south west) rectangle (fullpage.north east) ($(textarea.south west)-(2mm,2mm)$) rectangle ($(textarea.north east)+(2mm,2mm)$);
+%  \fill [cmykwhite] ($(textarea.south west)-(2mm,2mm)$) rectangle ($(textarea.north east)+(2mm,2mm)$);
   
  \node (KGD) [below=0 of textarea.north] {\Large\textbf \name};
   
@@ -83,6 +96,11 @@
  \qrc[above right=\off and \off of textarea.south west]{Vimeo}{godinduboisalife}{vimeo.com/godinduboisalife};
  \qrc[above=\off of textarea.south]{ResearchGate}{Kevin\_Godin-Dubois2}{www.researchgate.net/profile/Kevin_Godin-Dubois2};
  \qrc[above left=\off and \off of textarea.south east]{GitHub}{kgd-al}{github.com/kgd-al};
+ 
+%  \draw [red] (fullpage.south west) rectangle (fullpage.north east);
+%  \draw [red] ($(fullpage.south west)+(3mm,3mm)$) rectangle ($(fullpage.north east)-(3mm,3mm)$);
+%  \draw [red] ($(fullpage.south west)+(7mm,7mm)$) rectangle ($(fullpage.north east)-(7mm,7mm)$);
+%  
 \end{tikzpicture}
 
 \end{document}
