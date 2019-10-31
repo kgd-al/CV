@@ -113,7 +113,7 @@
  
  \def\angle{0}
  \def\aPhase{82.5}
- \foreach \n/\a in {\aPI/143.5, \aEd/-88.5, \aPE/-61, \aPC/-84, \aCS/-68.5, \aMi/-34} {
+ \foreach \n/\a in {\aPI/141.5, \aEd/-86.5, \aPE/-57.5, \aPC/-87.5, \aCS/-69.5, \aMi/-32} {
   \pgfmathsetmacro{\angle}{\angle+\a} \xdef\angle{\angle} \expandafter\xdef\n{\angle}
  }
 
@@ -122,7 +122,7 @@
  \def\v{.2cm}
  \nsect[anchor=north west,at={(page.north west)}]{PI}{\Large Kevin Godin-Dubois}{
   \addlinespace[\v]
-  \multicolumn{1}{c}{\large \emph{A-Life researcher on cognition evolution}} \\
+  \multicolumn{1}{c}{\large \emph{A-Life Researcher on the Emergence of Cognition}} \\
   \addlinespace[\v]
   \begin{tabular}{c@{ }m{.158\textwidth}c@{ }m{.11\textwidth}}
    \faHome & University of Toulouse & \faPhone & +33 5 67 06 93 91 \\
@@ -159,13 +159,13 @@
   \end{minipage}
  }{.6\textwidth}
  
- \nsect[anchor=north east, at={(page.17.5)}]{PE}{Professional Experience}{
+ \nsect[anchor=north east, at={(page.19)}]{PE}{Professional Experience}{
   \itm{2016-Present}{Teachings} \\
   \di 2017 \& 2018, Capitole University, Toulouse \\
   \dii L2 Excel and Visual Basic for Applications \\
   \dii L2 Algorithms and Visual Basic \\
   \dii L3 Modeling in Database \\
-  \di 2016 \& 2017, Paul Sabatier University \\
+  \di 2016 \& 2017, Paul Sabatier University, Toulouse \\
   \dii L2 project monitoring on C programming \\
   
   \itm{2016}{Internship IRIT, France} \\
@@ -179,13 +179,14 @@
  
  \nsect[anchor=south west, at={(page.south west)}]{PC}{Publications and Conferences}{
   \\
+  \di \fullcite{GodinDubois2019c} \\
   \di \fullcite{GodinDubois2019b} \\
   \di \fullcite{GodinDubois2019a} \\
   \di Poster presentation ``Studying long term interactions between plants and their environment'' at The 2018 Conference on Artificial Life \\
   \di \fullcite{Dubois2017}
  }{\textwidth}
  
- \nsect[anchor=west, at={(page.195)}]{CS}{Computing Skills}{
+ \nsect[anchor=west, at={(page.194)}]{CS}{Computing Skills}{
   \\
   \begin{minipage}{.15\textwidth}
    \begin{tabular}{c@{ }l}
@@ -230,10 +231,10 @@
   English (fluent) \\
   \\\textbf{Hobbies} \\
   Tabletop RPG \\
-  Reading (Carlton Mellick III, Science Fiction, Medieval) \\
+  Reading (Carlton Mellick III, Warhammer 40K) \\
   Music (Metal, Classical, Hard Rock, OSTs) \\
   Video games (Construction, Puzzle, RPG)
- }{.35\textwidth}
+ }{.3\textwidth}
  
   
 %  \draw [shift={(page.center)}, line width=.125pt]
@@ -245,8 +246,9 @@
 %          (\aPE:\R) arc (\aPE:\aPC:\R) -- (\aPC:\R) -- (PC)
 %        ;
 
-  \foreach \a/\n/\r in {\aPI/PI/.2, \aEd/Ed/.89, \aPE/PE/.94, \aPC/PC/.62, \aCS/CS/.57, \aMi/Mi/.3} {
+  \foreach \a/\n/\r in {\aPI/PI/.15, \aEd/Ed/.855, \aPE/PE/.73, \aPC/PC/.605, \aCS/CS/.545, \aMi/Mi/.3} {
    \draw [shift={(page.center)}, gray, line width=.25pt] (\a:\r * \R) -- (\a:\R) -- (\n);
+%    \draw [shift={(page.center)}, green, dotted] (\a:\r * \R) -- (\a:1.5*\R);
   }
 
 \end{tikzpicture}

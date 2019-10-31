@@ -1,15 +1,17 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
-\iftrue
+\iffalse
 \usepackage[french]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{csquotes}
 \def\Title{Publications en date du}
+\def\Orals{Pr\'esentations en Conf\'erence}
 \else
 \def\Title{Publications as of}
+\def\Orals{Conference Presentations}
 \fi
 \usepackage{array}
-\usepackage[backend=biber,maxcitenames=1]{biblatex}
+\usepackage[backend=biber,maxcitenames=1,isbn=false,url=false]{biblatex}
 \addbibresource{thesis.bib}
 \newcommand{\docite}[1]{$\bullet$ \fullcite{#1}}
 \begin{document}
@@ -22,6 +24,7 @@
 
 \renewcommand{\arraystretch}{1.2}
 \setlength{\tabcolsep}{0pt}
+\section{Publications}
 \begin{tabular}{m{.95\textwidth}}
  \\\textbf{2019} \\
  \docite{GodinDubois2019b} \\
@@ -30,4 +33,15 @@
  \\\textbf{2017} \\
  \docite{Dubois2017}
 \end{tabular}
+
+\section{\Orals}
+
+\begin{tabular}{m{.95\textwidth}}
+ \\\textbf{2019} \\
+ \docite{GodinDubois2019c} \\
+
+ \\\textbf{2018} \\
+ \docite{GodinDubois2018}
+\end{tabular}
+
 \end{document}
