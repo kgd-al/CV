@@ -23,6 +23,31 @@
 \usepackage[backend=biber,maxcitenames=1,doi=false,isbn=false,url=false]{biblatex}
 \addbibresource{thesis.bib}
 
+% Done:
+% - enlever le "present" dans les teachings, tu n'enseignes plus
+% - mettre ton nom en un peu plus visible (\Large > \LARGE)
+% - mettre des exemples de rpg
+% 
+%
+% Unsure:
+% - dans les publications, mettre le "ed" en décalé par rapport aux bullets points comme s'il avait une tabulation (enough?)
+% - dans les teachings décaler plus les bullets points blanches vers la droite (enough?)
+% 
+%
+% Pending:
+% - les boutons de chargement dans les computing skills ne rendent pas. On dirait des bullets points classiques.
+% - mettre des genres de lecture pas des auteurs
+% 
+% - je préfèrerais avoir des chemins rouges qui mènent à chaque rubrique
+% 
+% - l'adresse mail irit va-t-elle être pertinente longtemps ?
+% 
+% - décomposer l'anglais en writing, listening, hearing et du coup changer le nom de ta section en juste "languages"
+% 
+% - t'as mis 2x rpg dans les loisirs, ça fait nerd
+% 
+% - mettre les mentions des diplomes si tu le souhaites
+
 \title{CV - Kevin Godin-Dubois}
 \makeatletter
 \hypersetup{
@@ -65,7 +90,7 @@
 \setlength\parindent{24pt}
 
 \def\di{$\bullet$\ }
-\def\dii{\ $\circ$\ }
+\def\dii{\hspace{1.5em} $\circ$\ }
 
 \tikzfading[name=fade out,inner color=transparent!0,outer color=transparent!100]
 \def\sbcolor{red}
@@ -90,9 +115,16 @@
  \hspace{.5em}
  \begin{tikzpicture}
   \def\R{.15cm}
-  \shade[ball color = gray!40, opacity = 0.4] (0,0) circle (\R);
   \pgfmathsetmacro\A{90-3.6*#1}
-  \shade[ball color = \sbcolor!40, opacity = 0.8] (0,\R) arc (90:\A:\R) -- (0,0) -- cycle;
+  \def\bgcolor{gray!40}
+  \def\fgcolor{\sbcolor!50}
+  
+  \fill [white] (0,0) circle (\R);
+  \draw [\bgcolor] (\A:\R) arc (\A:-270:\R);
+  \draw [\fgcolor] (\A:\R) -- (0,0) -- (90:\R) arc (90:\A:\R) -- cycle;
+  
+  \shade[ball color = \bgcolor, opacity = 0.4] (0,0) circle (\R);
+  \shade[ball color = \fgcolor, opacity = 0.8] (0,\R) arc (90:\A:\R) -- (0,0) -- cycle;
  \end{tikzpicture}
 }
 
@@ -120,7 +152,7 @@
  \node [rotate=\aPI-\aPhase] (C) at (page.center) {\includegraphics[width=\D]{annexes/phylogenetics_monochrome}};
 
  \def\v{.2cm}
- \nsect[anchor=north west,at={(page.north west)}]{PI}{\Large Kevin Godin-Dubois}{
+ \nsect[anchor=north west,at={(page.north west)}]{PI}{\LARGE Kevin Godin-Dubois}{
   \addlinespace[\v]
   \multicolumn{1}{c}{\large \emph{A-Life Researcher on the Emergence of Cognition}} \\
   \addlinespace[\v]
@@ -160,7 +192,7 @@
  }{.6\textwidth}
  
  \nsect[anchor=north east, at={(page.19)}]{PE}{Professional Experience}{
-  \itm{2016-Present}{Teachings} \\
+  \itm{2016-2019}{Teachings} \\
   \di 2017 \& 2018, Capitole University, Toulouse \\
   \dii L2 Excel and Visual Basic for Applications \\
   \dii L2 Algorithms and Visual Basic \\
@@ -181,8 +213,10 @@
   \\
   \di \fullcite{GodinDubois2019c} \\
   \di \fullcite{GodinDubois2019b} \\
+  \hangindent=1em
   \di \fullcite{GodinDubois2019a} \\
   \di Poster presentation ``Studying long term interactions between plants and their environment'' at The 2018 Conference on Artificial Life \\
+  \hangindent=1em
   \di \fullcite{Dubois2017}
  }{\textwidth}
  
@@ -230,8 +264,8 @@
   French (mother tongue) \\
   English (fluent) \\
   \\\textbf{Hobbies} \\
-  Tabletop RPG \\
-  Reading (Carlton Mellick III, Warhammer 40K) \\
+  Tabletop RPG (Shadowrun, Pathfinder) \\
+  Reading (Warhammer 40K, Carlton Mellick III) \\
   Music (Metal, Classical, Hard Rock, OSTs) \\
   Video games (Construction, Puzzle, RPG)
  }{.3\textwidth}
@@ -246,10 +280,38 @@
 %          (\aPE:\R) arc (\aPE:\aPC:\R) -- (\aPC:\R) -- (PC)
 %        ;
 
-  \foreach \a/\n/\r in {\aPI/PI/.15, \aEd/Ed/.855, \aPE/PE/.73, \aPC/PC/.605, \aCS/CS/.545, \aMi/Mi/.3} {
-   \draw [shift={(page.center)}, gray, line width=.25pt] (\a:\r * \R) -- (\a:\R) -- (\n);
-%    \draw [shift={(page.center)}, green, dotted] (\a:\r * \R) -- (\a:1.5*\R);
-  }
+  \begin{scope}[shift={(page.center)}, x=\R, y=\R, red, line width=.25pt, line cap=round]
+   \foreach \a/\n/\r in {\aPI/PI/0, \aEd/Ed/.855, \aPE/PE/.73, \aPC/PC/.605, \aCS/CS/.53, \aMi/Mi/.295} {
+    \draw (\a:\r * \R) -- (\a:\R) -- (\n);
+%     \draw [green, dotted] (\a:\r * \R) -- (\a:1.5*\R);
+   }
+  
+   \def\move(#1){ \xdef\ppath{\ppath -- (\a:#1)} \def\r{#1} }
+   \def\arc(#1){ \xdef\ppath{\ppath arc (\a:\a+#1:\r)} \pgfmathsetmacro{\a}{\a+#1} }
+   \def\startdraw(#1:#2){ \xdef\a{#1}; \xdef\r{#2}; \xdef\ppath{(\a:\r) }; }
+   \def\enddraw{ \draw \ppath; }
+   
+   \startdraw(\aEd:.855)
+   \arc(63.125)\move(.363)\arc(10)\move(.3)\arc(1.5)\move(.2575)\arc(11.5)
+   \enddraw
+
+   \startdraw(\aPE:.73)
+   \arc(1.25)\move(.70)\arc(36.5)\move(.6925)\arc(82.75)
+   \enddraw
+   
+   \startdraw(\aPC:.605)
+   \arc(208)
+   \enddraw
+   
+   \startdraw(\aCS:.53)
+   \arc(.25)\move(.43)\arc(277)
+   \enddraw
+   
+   \startdraw(\aMi:.295)
+   \arc(319.5)
+   \enddraw
+   
+  \end{scope}
 
 \end{tikzpicture}
 \end{document}
