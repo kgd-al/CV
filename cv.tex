@@ -23,34 +23,17 @@
 \usepackage[backend=biber,maxcitenames=1,doi=false,isbn=false,url=false]{biblatex}
 \addbibresource{thesis.bib}
 
-% Done:
-% - enlever le "present" dans les teachings, tu n'enseignes plus
-% - mettre ton nom en un peu plus visible (\Large > \LARGE)
-% - mettre des exemples de rpg
-% - dans les publications, mettre le "ed" en décalé par rapport aux bullets points comme s'il avait une tabulation (enough?)
-% - dans les teachings décaler plus les bullets points blanches vers la droite (enough?)
-% - les boutons de chargement dans les computing skills ne rendent pas. On dirait des bullets points classiques.
-% - mettre des genres de lecture pas des auteurs
-% - je préfèrerais avoir des chemins rouges qui mènent à chaque rubrique
-%
-% Unsure:
-% 
-%
-% Pending:
-% - l'adresse mail irit va-t-elle être pertinente longtemps ?
-% 
-% - décomposer l'anglais en writing, listening, hearing et du coup changer le nom de ta section en juste "languages"
-% 
-% - t'as mis 2x rpg dans les loisirs, ça fait nerd
-% 
-% - mettre les mentions des diplomes si tu le souhaites
+\AtEveryCitekey{\clearname{author}}
+\newcommand{\docite}[1]{\fullcite{#1}}
 
-\title{CV - Kevin Godin-Dubois}
+\def\mailto#1{\small(\href{mailto:#1}{\texttt{#1}})}
+
+\def\me{K\'evin Godin-Dubois}
 \makeatletter
 \hypersetup{
  pdfinfo={
-  Author={Kevin Godin-Dubois},
-  Title={\@title}
+  Author={\me},
+  Title={\me{} - CV}
  }
 }
 \makeatother
@@ -172,7 +155,7 @@
     \itm{2016-Present}{Capitole University, Toulouse} \\
     \emph{PhD thesis, ``Environment driven speciation''} \\
     { \small Investigated how complexification of artificial creatures could be further enhanced by moving the control apparatus around the abiotic component of an ecosystem } \\
-    \\
+    \textbf{Contact:} Pr. Y. Duthen \mailto{yves.duthen@irit.fr}
    \end{tabular}
   \end{minipage}
   \hfill
@@ -201,20 +184,23 @@
   {\small \textsc{Toulouse Research Institute on Computer Science}} \\
   \emph{``Rule-based artificial embryogenesis in a complex 3D environment''} \\
   {\small Deployed rule-based genomes on the MecaCell platform to study artificial plant growth and cell specialization.} \\
+  
   \itm{2015}{Internship IRIT, France} \\
   \emph{``Comparison of different evolutionary approaches, an application to the GECCO 2015 challenge''} \\
   {\small Performed a performance comparison (accuracy, efficiency) between Artificial Neural and Genetic Regulatory Networks on the 2015 GECCO temperature prediction challenge data.} \\
+  \textbf{Contact:} Pr. H. Luga \mailto{herve.luga@irit.fr}
  }{.35\textwidth}
  
  \nsect[anchor=south west, at={(page.south west)}]{PC}{Publications and Conferences}{
   \\
-  \di Oral presentation \fullcite{GodinDubois2019c} \\
-  \di \fullcite{GodinDubois2019b} \\
-  \hangindent=1em
-  \di \fullcite{GodinDubois2019a} \\
-  \di Poster presentation ``Studying long term interactions between plants and their environment'' at The 2018 Conference on Artificial Life \\
-  \hangindent=1em
-  \di \fullcite{Dubois2017}
+  \di \docite{GodinDubois2020a} \\
+  \di \docite{GodinDubois2019c} \\
+  \di \docite{GodinDubois2019b} \\
+  \hangindent=2em
+  \di \docite{GodinDubois2019a} \\
+  \di Poster presentation \docite{GodinDubois2018} \\
+%   \hangindent=1em
+  \di \docite{Dubois2017} \\
  }{\textwidth}
  
  \nsect[anchor=west, at={(page.194)}]{CS}{Computing Skills}{
