@@ -1,34 +1,46 @@
-\documentclass[a4paper,10pt]{article}
-\usepackage[utf8]{inputenc}
+\documentclass[a4paper,12pt]{article}
 
-% \usepackage[T1]{fontenc}
-% \usepackage{tgbonum}
+\usepackage[margin=1in]{geometry}
 
 \usepackage{tikz}
 \usetikzlibrary{calc,fadings,shadings}
 
-\usepackage{array}
-\usepackage{tabularx}
-
-\usepackage[noheadfoot, nomarginpar, landscape, margin=.5in, verbose]{geometry}
-
 \usepackage{hyperref}
 
-\usepackage{xcolor}
-
 \usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{makecell}
 
-\usepackage{fontawesome}
+\usepackage[backend=biber,maxcitenames=1,doi=false,isbn=false,url=false,sorting=ydnt]{biblatex}
+\addbibresource{cv.bib}
 
-\usepackage[backend=biber,maxcitenames=1,doi=false,isbn=false,url=false]{biblatex}
-\addbibresource{thesis.bib}
+\usepackage{eurosym}
+% \usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{fontawesome} % Symbols in the contact section
 
-\AtEveryCitekey{\clearname{author}}
-\newcommand{\docite}[1]{\fullcite{#1}}
+\usepackage{calc} % To compute available rspace based on lspace
 
-\def\mailto#1{\small(\href{mailto:#1}{\texttt{#1}})}
+% Put pages number in footer
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\fancyfoot[C]{\thepage\ of \pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\pagestyle{fancy}
+\fancyhead{}
 
-\def\me{K\'evin Godin-Dubois}
+\usepackage{contour}
+\usepackage[normalem]{ulem}
+\renewcommand{\ULdepth}{1.8pt}
+\contourlength{0.8pt}
+\newcommand{\prettyuline}[1]{%
+ \uline{\phantom{#1}}%
+ \llap{\contour{white}{#1}}%
+}
+
+\def\mailto#1{\small\href{mailto:#1}{\texttt{#1}}}
+
+\def\me{Kevin Godin-Dubois}
 \makeatletter
 \hypersetup{
  pdfinfo={
@@ -38,39 +50,54 @@
 }
 \makeatother
 
+\overfullrule=1mm
+
+% No indent
+\setlength\parindent{0pt}
+
+\listfiles % To monitor file inclusion (in git)
+
 \begin{document}
-\def\ifdrawguidelines{\iffalse}
 
-\newlength{\innersep}
-\setlength{\innersep}{5pt}
-\tikzset{
- sect/.style={
-%   draw,
-  inner sep=\innersep
- }
+% Prepare lengths
+\newlength\lwidth
+\setlength\lwidth{.2\textwidth}
+\newlength\cwidth
+\setlength\cwidth{\dimexpr2\tabcolsep}
+\newlength\rwidth
+\setlength\rwidth{\dimexpr\textwidth-\lwidth-\cwidth-.4pt}
+
+% Local variables
+\newlength\titlewidth
+\newlength\titleoffset
+
+% Display width repartition
+% {\color{red}\rule{\lwidth}{1mm}}{\color{green}\rule{\cwidth}{1mm}}{\color{blue}\rule{\rwidth}{1mm}}
+
+\newenvironment{sect}[2][{\\[0pt]}]{%
+ \def\title{\Large\prettyuline{\texttt{\textbf{#2}}}}%
+ \setlength{\titlewidth}{\widthof{\title}}%
+ \setlength{\titleoffset}{\maxof{0pt}{\lwidth-\titlewidth*\real{0.5}}}%
+%  lwidth: \the\lwidth \\
+%  title width: \the\titlewidth\\
+%  title offset: \the\titleoffset \\
+%  
+ \begin{longtable}{@{}c|c@{}}%\\\\[-.75cm]
+  \multicolumn{2}{l}{\hspace{\titleoffset}\title}\vspace{-2.9pt}\\#1%\\[-10pt]
+}{%
+ \end{longtable}%
+}%
+
+\newcommand{\itm}[3]{%
+ \makecell[t{p{\lwidth}}]{\hfill \textbf{#1} \\ \hfill #2} & \makecell[t{p{\rwidth}}]{#3} \\
 }
-\newcommand{\nsect}[5][]{
- \setlength{\tabcolsep}{0pt}
- \node [sect, #1] (#2) {
-  \begin{sect}{#3}{#5}
-    #4
-  \end{sect}
- };
-}
-\newenvironment{sect}[2]
-               {\begin{tabular}{m{\dimexpr#2-2\innersep\relax}}\multicolumn{1}{c}{\large\textbf{#1}}\\}
-               {\end{tabular}}
 
-\newcommand{\itm}[2]{\\\textbf{#1} - #2}
-
-\pgfmathsetlengthmacro\D{.2*\textwidth}
-\pgfmathsetlengthmacro{\R}{.5*\D}
-\thispagestyle{empty}
-
-\setlength\parindent{24pt}
-
+\newcommand{\olditm}[2][]{\textbf{#2}\ifx\hfuzz#1\hfuzz\else\ - #1\fi\par}
 \def\di{$\bullet$\ }
 \def\dii{\hspace{1.5em} $\circ$\ }
+\renewcommand{\labelitemi}{\di}
+\renewcommand{\labelitemii}{\dii}
+\setlist[itemize]{noitemsep}
 
 \tikzfading[name=fade out,inner color=transparent!0,outer color=transparent!100]
 \def\sbcolor{red}
@@ -78,8 +105,8 @@
  \begin{tikzpicture}
   \def\sbx{0}
   \def\sby{0}
-  \def\sbwA{.66\textwidth}
-  \pgfmathsetmacro{\sbwB}{#1 / 100 * .66\textwidth}
+  \def\sbwA{.8\linewidth}
+  \pgfmathsetmacro{\sbwB}{#1 / 100 * \sbwA}
   \def\sbh{.1cm}
   \def\sbr{1.5pt}
   
@@ -91,210 +118,176 @@
  \end{tikzpicture}
 }
 
-\newcommand{\skilldisk}[1]{
- \hspace{.5em}
- \begin{tikzpicture}
-  \def\R{.15cm}
+% \newcounter{sdc}
+\newcommand{\skilldisk}[1]{%
+ \hspace{.5em}%
+ \def\R{.15cm}%
+ \begin{tikzpicture}[remember picture]%
   \pgfmathsetmacro\A{90-3.6*#1}
   \def\bgcolor{gray!40}
   \def\fgcolor{\sbcolor!50}
   
   \fill [white] (0,0) circle (\R);
-  \draw [\bgcolor] (\A:\R) arc (\A:-270:\R);
-  \draw [\fgcolor] (\A:\R) -- (0,0) -- (90:\R) arc (90:\A:\R) -- cycle;
+%   \draw [\bgcolor] (\A:\R) arc (\A:-270:\R);
+%   \draw [\fgcolor] (\A:\R) -- (0,0) -- (90:\R) arc (90:\A:\R) -- cycle;
   
   \shade[ball color = \bgcolor, opacity = 0.4] (0,0) circle (\R);
   \shade[ball color = \fgcolor, opacity = 0.8] (0,\R) arc (90:\A:\R) -- (0,0) -- cycle;
- \end{tikzpicture}
+  
+%   \coordinate (SD\thesdc) at (0,0);
+ \end{tikzpicture}%
+%  \tikz[remember picture, overlay] \draw (SD\thesdc) ++(0,5*\R) -- ++(0,-10*\R);%
+%  \stepcounter{sdc}
 }
 
-\def\skilllevel{\skilldisk}
+\def\skilllevel{\skillbar}
 
-\begin{tikzpicture}[remember picture, overlay]
- \node (page) at (current page.center) [minimum width=\textwidth, minimum height=\textheight] {};
- 
- \ifdrawguidelines
-  \foreach \a in {center, north, east, west, south, north east, north west, south west, south east} { \node [draw] at (\a) {\a}; }
-  \tikzset{guideline/.style={dotted,gray,thick}}
-  \draw [guideline] (north) -- (south);
-  \draw [guideline] (west) -- (east);
-  \draw [guideline] (east) -- (north) -- (west) -- (south) -- cycle;
-  \draw [guideline] (north east) -- (north west) -- (south west) -- (south east);
- \fi
- 
- 
- \def\angle{0}
- \def\aPhase{82.5}
- \foreach \n/\a in {\aPI/141.5, \aEd/-86.5, \aPE/-57.5, \aPC/-87.5, \aCS/-69.5, \aMi/-32} {
-  \pgfmathsetmacro{\angle}{\angle+\a} \xdef\angle{\angle} \expandafter\xdef\n{\angle}
- }
-
- \node [rotate=\aPI-\aPhase] (C) at (page.center) {\includegraphics[width=\D]{annexes/phylogenetics_monochrome}};
-
- \def\v{.2cm}
- \nsect[anchor=north west,at={(page.north west)}]{PI}{\LARGE Kevin Godin-Dubois}{
-  \addlinespace[\v]
-  \multicolumn{1}{c}{\large \emph{A-Life Researcher on the Emergence of Cognition}} \\
-  \addlinespace[\v]
-  \begin{tabular}{c@{ }m{.158\textwidth}c@{ }m{.11\textwidth}}
+\begin{sect}{\Huge Kevin Godin-Dubois}
+ \itm{Contact}{}{%
+  \centering\begin{tabular}[t]{c@{ }m{.35\textwidth}c@{ }m{.3\textwidth}}
    \faHome & University of Toulouse & \faPhone & +33 5 67 06 93 91 \\
            & IRIT - CNRS UMR 5505   & \faMobile & +33 6 18 72 09 06 \\
-           & \multicolumn{3}{l}{2 rue du Doyen Gabriel Marty} \\
-           & 31042 Toulouse, France & \\
-   \addlinespace[.1cm]
-   \faEnvelopeO & \href{mailto:kevin.dubois@irit.fr}{kevin.dubois@irit.fr} &
-       \faVimeo & \href{https://vimeo.com/godinduboisalife}{godinduboisalife} \\
-      \faGithub & \href{https://github.com/kgd-al}{kgd-al@github.com} &
-     \faRefresh & \href{https://github.com/kgd-al/CV/raw/master/cv.pdf}{Up-to date version} \\
+           & 2 rue du Doyen Gabriel Marty & \faGithub & \href{https://github.com/kgd-al}{kgd-al@github.com} \\
+           & 31042 Toulouse, France & \faVimeo & \href{https://vimeo.com/godinduboisalife}{godinduboisalife} \\
+%    \addlinespace[.1cm]
+   \faEnvelopeO & \mailto{godindubois@gmail.com} &
+     \faRefresh & \href{https://github.com/kgd-al/CV/raw/master/cv.pdf}{Up-to date version} 
   \end{tabular}
- }{.32\textwidth}
+ }
+ \\\\
  
- \nsect[anchor=north east,at={(page.35)}]{Ed}{Education}{
-  \begin{minipage}{.275\textwidth}
-   \begin{tabular}{m{\textwidth}}
-    \itm{2016-Present}{Capitole University, Toulouse} \\
-    \emph{PhD thesis, ``Environment driven speciation''} \\
-    { \small Investigated how complexification of artificial creatures could be further enhanced by moving the control apparatus around the abiotic component of an ecosystem } \\
-    \textbf{Contact:} Pr. Y. Duthen \mailto{yves.duthen@irit.fr}
-   \end{tabular}
+ \itm{Synopsis}{}{
+  {\centering\large \emph{A-Life Researcher on the Emergence of Cognition}}%
+  \\\small
+  After a PhD thesis focused on artificial plant-like lifeforms and their dynamics at the evolutionary scale, I plan on returning to my core interest: artificial cognition.
+  More specifically, my objectives are to investigate the mechanisms by which high-level forms of interaction can be built upon low-level inputs/outputs, especially in response to environmental constraints.
+ }%
+ \\
+ 
+ \itm{Interests}{}{%
+ \hfill
+ \foreach \i/\l in {mew/Morphogenetic Engineering\cite{Dubois2017},
+                    phylogenetics_colored/{Species Dynamics}\cite{GodinDubois2019b,GodinDubois2019c},
+                    splinoids_combat/Artificial Cognition\cite{GodinDubois2020b}} {
+  \begin{minipage}[t]{.2\textwidth}
+   \centering
+   \includegraphics[width=\textwidth]{annexes/\i} \\
+   \l
   \end{minipage}
   \hfill
-  \begin{minipage}{.275\textwidth}
-   \begin{tabular}{m{\textwidth}}
-    \itm{2014-2016}{Paul Sabatier University, Toulouse} \\
-    \emph{Master's degree in Computer Science} \\
-    {\small Artificial intelligence: mathematical and symbolic models, training methods} \\
-  
-    \itm{2011-2014}{Paul Sabatier University, Toulouse} \\
-    \emph{Bachelor's degree in Computer Science}
-   \end{tabular}
-  \end{minipage}
- }{.6\textwidth}
+ } 
+ }
+\end{sect}
+
+\begin{sect}{Education}
+ \itm{PhD}{2016 - July 2020}{%
+  Toulouse University, France \\
+  Thesis title: \emph{``Environment-driven speciation: long term interactions in artificial plant communities''} \\
+  { \small Investigated how complexification of artificial creatures could be further enhanced by moving the control apparatus around the abiotic component of an ecosystem } \\
+  \textbf{Contact:} Pr. Y. Duthen (\mailto{yves.duthen@irit.fr})
+ }
+ \\
+   
+ \itm{Master}{2014 - 2016}{
+  Toulouse University, France \\
+  {\small Artificial intelligence: mathematical \& symbolic models, training methods}
+ }
+ \\
  
- \nsect[anchor=north east, at={(page.19)}]{PE}{Professional Experience}{
-  \itm{2016-2019}{Teachings} \\
-  \di 2017 \& 2018, Capitole University, Toulouse \\
-  \dii L2 Excel and Visual Basic for Applications \\
-  \dii L2 Algorithms and Visual Basic \\
-  \dii L3 Modeling in Database \\
-  \di 2016 \& 2017, Paul Sabatier University, Toulouse \\
-  \dii L2 project monitoring on C programming \\
-  
-  \itm{2016}{Internship IRIT, France} \\
-  {\small \textsc{Toulouse Research Institute on Computer Science}} \\
+ \itm{Bachelor}{2011 - 2014}{
+  Toulouse University, France \\
+  {\small Computer science: Networks, Programming, Systems, Mathematics}
+ }
+\end{sect}
+ 
+\begin{sect}{Experience}
+ \itm{Teachings}{2017 - 2019}{
+  Capitole University, Toulouse, France \\
+  \di L2 Excel and Visual Basic for Applications \\
+  \di L2 Algorithms and Visual Basic \\
+  \di L3 Modeling in Database \\
+ }
+ \\
+ 
+ \itm{Teachings}{2016 - 2017}{%
+  Paul Sabatier University, Toulouse, France \\
+  \di L2 project monitoring on C programming \\
+ }
+ \\
+ 
+ \itm{Internship}{2016 (6 months)}{
+  Toulouse Research Institute on Computer Science (IRIT), France \\
   \emph{``Rule-based artificial embryogenesis in a complex 3D environment''} \\
-  {\small Deployed rule-based genomes on the MecaCell platform to study artificial plant growth and cell specialization.} \\
-  
-  \itm{2015}{Internship IRIT, France} \\
+  {\small Deployed rule-based genomes on the MecaCell platform to study artificial plant growth and cell specialization.}
+ }
+ \\
+ 
+ \itm{Internship}{2015 (1 month)}{
   \emph{``Comparison of different evolutionary approaches, an application to the GECCO 2015 challenge''} \\
   {\small Performed a performance comparison (accuracy, efficiency) between Artificial Neural and Genetic Regulatory Networks on the 2015 GECCO temperature prediction challenge data.} \\
-  \textbf{Contact:} Pr. H. Luga \mailto{herve.luga@irit.fr}
- }{.35\textwidth}
- 
- \nsect[anchor=south west, at={(page.south west)}]{PC}{Publications and Conferences}{
-  \\
-  \di \docite{GodinDubois2020a} \\
-  \di \docite{GodinDubois2019c} \\
-  \di \docite{GodinDubois2019b} \\
-  \hangindent=2em
-  \di \docite{GodinDubois2019a} \\
-  \di Poster presentation \docite{GodinDubois2018} \\
-%   \hangindent=1em
-  \di \docite{Dubois2017} \\
- }{\textwidth}
- 
- \nsect[anchor=west, at={(page.194)}]{CS}{Computing Skills}{
-  \\
-  \begin{minipage}{.15\textwidth}
-   \begin{tabular}{c@{ }l}
-   \faCogs & \textbf{Languages} \\
-    \skilllevel{90}
-    & C++ \\
-    \skilllevel{80}
-    & C, Java  \\
-    \skilllevel{70}
-    & Python \\
-    & \\
-   \faAreaChart & \textbf{Processing} \\
-    \skilllevel{80} 
-    & Gnuplot \\
-    \skilllevel{70}
-    & Octave/Matlab \\
+  \textbf{Contact:} Pr. H. Luga (\mailto{herve.luga@irit.fr})
+ }
+\end{sect}
 
-   \end{tabular}
-  \end{minipage}
-  \hfill
-  \begin{minipage}{.15\textwidth}
-   \begin{tabular}{c@{ }l}
-    \faAlignJustify & \textbf{Redaction} \\
-    \skilllevel{85}
-    & \LaTeX / Ti\textit{k}Z\\
-    \skilllevel{60}
-    & Office Software \\
-    \\
-    \faLinux & \textbf{Systems} \\
-    \skilllevel{80}
-    & Linux \\
-    \skilllevel{70}
-    & Windows, Android \\
-    \\
-   \end{tabular}   
-  \end{minipage}
- }{.32\textwidth}
- 
- \nsect[anchor=west,at={(page.172.5)}]{Mi}{Miscellaneous}{
-  \\\textbf{Spoken Languages} \\
-  French (mother tongue) \\
-  English (fluent) \\
-  \\\textbf{Hobbies} \\
-  Tabletop RPG (Shadowrun, Pathfinder) \\
-  Reading (Warhammer 40K, Carlton Mellick III) \\
-  Music (Metal, Classical, Hard Rock, OSTs) \\
-  Video games (Construction, Puzzle, RPG)
- }{.3\textwidth}
- 
+\newcommand{\formatskill}[2]{\skilldisk{#2} \small#1}
+\def\cols(#1)#2{%
+ \itm{#1}{}{%
+  \foreach \p/\l in {#2} {%
+   \begin{minipage}{.32\rwidth}\formatskill{\l}{\p}\end{minipage}%
+  }%
+ }%
+}
+\begin{sect}{Skills}
+ \cols(Programming){%
+  90/C++,
+  80/{C, Java},
+  70/Python}%
   
-%  \draw [shift={(page.center)}, line width=.125pt]
-%    (0,0) -- (\aPI:\R) -- (PI)
-%      (\aPI:.6*\R) arc (\aPI:\aMi:.6*\R) -- (\aMi:\R) -- (Mi)
-%      (\aPI:.7*\R) arc (\aPI:\aEd:.7*\R) -- (\aEd:\R) -- (Ed)
-%        (\aEd:.8*\R) arc (\aEd:\aPE:.8*\R) -- (\aPE:\R) -- (PE)
-%          (\aPE:.9*\R) arc (\aPE:\aCS:.9*\R) -- (\aCS:\R) -- (CS)
-%          (\aPE:\R) arc (\aPE:\aPC:\R) -- (\aPC:\R) -- (PC)
-%        ;
+ \cols(Processing){%
+  90/{Bash (sed, awk ...)},
+  85/Gnuplot,
+  70/{Octave/Matlab}
+ }
+ 
+ \cols(Redaction){%
+  85/{\LaTeX / Ti\textit{k}Z},
+  75/Office Software
+ }
+ 
+ \cols(Systems){%
+  85/Linux,
+  70/{Windows, Android}
+ }
 
-  \begin{scope}[shift={(page.center)}, x=\R, y=\R, red, line width=.25pt, line cap=round]
-   \foreach \a/\n/\r in {\aPI/PI/0, \aEd/Ed/.855, \aPE/PE/.73, \aPC/PC/.605, \aCS/CS/.53, \aMi/Mi/.295} {
-    \draw (\a:\r * \R) -- (\a:\R) -- (\n);
-%     \draw [green, dotted] (\a:\r * \R) -- (\a:1.5*\R);
-   }
-  
-   \def\move(#1){ \xdef\ppath{\ppath -- (\a:#1)} \def\r{#1} }
-   \def\arc(#1){ \xdef\ppath{\ppath arc (\a:\a+#1:\r)} \pgfmathsetmacro{\a}{\a+#1} }
-   \def\startdraw(#1:#2){ \xdef\a{#1}; \xdef\r{#2}; \xdef\ppath{(\a:\r) }; }
-   \def\enddraw{ \draw \ppath; }
-   
-   \startdraw(\aEd:.855)
-   \arc(63.125)\move(.363)\arc(10)\move(.3)\arc(1.5)\move(.2575)\arc(11.5)
-   \enddraw
+ \cols(Languages){%
+  95/French,
+  90/English
+ }
+\end{sect}
+ 
+\begin{sect}{Scholarships and Fellowships}
+ \itm{2016}{70K \euro}
+     {PhD Fellowship from the French Minister of Higher Education and Research (MESR) - over 3 years}
+ \\
+ 
+ \itm{2015}{10K \euro}
+     {Master Scholarship from the International Mathematics and Computer Science Center (LabEx CIMI, Toulouse)}
+ \\
+     
+ \itm{2014}{3K6 \euro}
+     {Merit Scholarship from the Regional Student Welfare Office (CROUS, Toulouse) - over 2 years}
+\end{sect}
 
-   \startdraw(\aPE:.73)
-   \arc(1.25)\move(.70)\arc(36.5)\move(.6925)\arc(82.75)
-   \enddraw
-   
-   \startdraw(\aPC:.605)
-   \arc(208)
-   \enddraw
-   
-   \startdraw(\aCS:.53)
-   \arc(.25)\move(.43)\arc(277)
-   \enddraw
-   
-   \startdraw(\aMi:.295)
-   \arc(319.5)
-   \enddraw
-   
-  \end{scope}
+\begin{sect}[]{Research Output}
+ \multicolumn{1}{m{\lwidth}}{} & \multicolumn{1}{m{\rwidth-11.6pt}}{}
+\end{sect}%
+\vspace{-\baselineskip}
+\nocite{*}%
+\olditm{Pending publication}{}
+\printbibliography[heading=none, type=unpublished]
+\olditm{Peer-reviewed publications}{}
+\printbibliography[heading=none, nottype=misc,nottype=unpublished]
+\olditm{Oral presentations}{}
+\printbibliography[heading=none, nottype=unpublished, subtype=talk]
 
-\end{tikzpicture}
 \end{document}
