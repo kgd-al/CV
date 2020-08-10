@@ -1,45 +1,84 @@
 \documentclass[a4paper,12pt]{article}
 
+% Sets margins
 \usepackage[margin=1in]{geometry}
 
+% To draw the skill circles
 \usepackage{tikz}
 \usetikzlibrary{calc,fadings,shadings}
 
+\tikzfading[name=fade out,inner color=transparent!0,outer color=transparent!100]
+\newcommand{\skilldisk}[1]{%
+ \def\sbcolor{red}
+ \hspace{.5em}%
+ \def\R{.15cm}%
+ \begin{tikzpicture}[remember picture]%
+  \pgfmathsetmacro\A{90-3.6*#1}
+  \def\bgcolor{gray!40}
+  \def\fgcolor{\sbcolor!50}
+  
+  \fill [white] (0,0) circle (\R);
+  
+  \shade[ball color = \bgcolor, opacity = 0.4] (0,0) circle (\R);
+  \shade[ball color = \fgcolor, opacity = 0.8] (0,\R) arc (90:\A:\R) -- (0,0) -- cycle;
+ \end{tikzpicture}%
+}
+
+% For hyperlinks, as usual
 \usepackage{hyperref}
 
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{makecell}
+% Main tabular layout
+% \usepackage{booktabs} % Surprisingly un-used here
+\usepackage{longtable} % Pagebreak-able tables
+\usepackage{makecell} % Encapsulated tabular cell contents
 
+% The list of publications (with links)
 \usepackage[backend=biber,maxcitenames=1,doi=false,isbn=false,url=false,sorting=ydnt]{biblatex}
 \addbibresource{cv.bib}
 
+% The euro symbol
 \usepackage{eurosym}
-% \usepackage{multicol}
-\usepackage{enumitem}
-\usepackage{fontawesome} % Symbols in the contact section
 
-\usepackage{calc} % To compute available rspace based on lspace
+% Symbols in the contact section
+\usepackage{fontawesome}
+
+ % To compute available rspace based on lspace
+\usepackage{calc}
 
 % Put pages number in footer
 \usepackage{lastpage}
 \usepackage{fancyhdr}
-\fancyfoot[C]{\thepage\ of \pageref*{LastPage}}
+
+\def\fancysize{\small}
+
+\fancyfoot[C]{\fancysize \thepage\ of \pageref*{LastPage}}
+\fancyhead{}
+ 
+\fancypagestyle{fancyfirst}{
+ \fancyhead{}
+ \fancyfoot[L]{\fancysize Updated on \today{}}
+ \fancyfoot[C]{\fancysize \faRefresh \href{https://github.com/kgd-al/CV/raw/master/cv.pdf}{Up-to date version}}
+ \fancyfoot[R]{\fancysize \footnotesize Page \thepage\ of \pageref*{LastPage}}
+}
+
 \renewcommand{\headrulewidth}{0pt}
 \pagestyle{fancy}
-\fancyhead{}
+\thispagestyle{fancyfirst}
 
+% For (excessively) pretty underlining
 \usepackage{contour}
 \usepackage[normalem]{ulem}
-\renewcommand{\ULdepth}{1.8pt}
+\renewcommand{\ULdepth}{2pt}
 \contourlength{0.8pt}
 \newcommand{\prettyuline}[1]{%
  \uline{\phantom{#1}}%
  \llap{\contour{white}{#1}}%
 }
 
+% Helper for the mail links
 \def\mailto#1{\small\href{mailto:#1}{\texttt{#1}}}
 
+% Pdf meta-data
 \def\me{Kevin Godin-Dubois}
 \makeatletter
 \hypersetup{
@@ -50,13 +89,19 @@
 }
 \makeatother
 
-\overfullrule=1mm
-
 % No indent
 \setlength\parindent{0pt}
 
-\listfiles % To monitor file inclusion (in git)
+% =============================================================================
+% Draft section
 
+% To monitor file inclusion (in git)
+\listfiles 
+
+% Overfull hbox debugging
+\overfullrule=1mm
+
+% =============================================================================
 \begin{document}
 
 % Prepare lengths
@@ -74,7 +119,7 @@
 % Display width repartition
 % {\color{red}\rule{\lwidth}{1mm}}{\color{green}\rule{\cwidth}{1mm}}{\color{blue}\rule{\rwidth}{1mm}}
 
-\newenvironment{sect}[2][{\\[0pt]}]{%
+\newenvironment{sect}[2][{\\*[0pt]}]{%
  \def\title{\Large\prettyuline{\texttt{\textbf{#2}}}}%
  \setlength{\titlewidth}{\widthof{\title}}%
  \setlength{\titleoffset}{\maxof{0pt}{\lwidth-\titlewidth*\real{0.5}}}%
@@ -83,7 +128,7 @@
 %  title offset: \the\titleoffset \\
 %  
  \begin{longtable}{@{}c|c@{}}%\\\\[-.75cm]
-  \multicolumn{2}{l}{\hspace{\titleoffset}\title}\vspace{-2.9pt}\\#1%\\[-10pt]
+  \multicolumn{2}{l}{\hspace{\titleoffset}\title}\vspace{-2.9pt}\\*#1%\\[-10pt]
 }{%
  \end{longtable}%
 }%
@@ -92,55 +137,13 @@
  \makecell[t{p{\lwidth}}]{\hfill \textbf{#1} \\ \hfill #2} & \makecell[t{p{\rwidth}}]{#3} \\
 }
 
-\newcommand{\olditm}[2][]{\textbf{#2}\ifx\hfuzz#1\hfuzz\else\ - #1\fi\par}
 \def\di{$\bullet$\ }
 \def\dii{\hspace{1.5em} $\circ$\ }
 \renewcommand{\labelitemi}{\di}
 \renewcommand{\labelitemii}{\dii}
-\setlist[itemize]{noitemsep}
 
-\tikzfading[name=fade out,inner color=transparent!0,outer color=transparent!100]
-\def\sbcolor{red}
-\newcommand{\skillbar}[1]{
- \begin{tikzpicture}
-  \def\sbx{0}
-  \def\sby{0}
-  \def\sbwA{.8\linewidth}
-  \pgfmathsetmacro{\sbwB}{#1 / 100 * \sbwA}
-  \def\sbh{.1cm}
-  \def\sbr{1.5pt}
-  
-  \draw [\sbcolor, rounded corners=\sbr] (\sbx,\sby) rectangle (\sbwA,\sbh);
-  \path [clip, rounded corners=\sbr] (\sbx,\sby) rectangle (\sbwB pt,\sbh);
-  \fill [\sbcolor] (\sbx,\sby) rectangle (\sbwB pt,\sbh); 
-  \fill [\sbcolor!50!black,path fading=fade out] (-\sbwB pt,\sby+\sbh) rectangle (\sbwB pt,-\sbh);
-  \fill [\sbcolor!20!white,path fading=fade out] (0,\sby+2*\sbh) rectangle (2*\sbwB pt,0);
- \end{tikzpicture}
-}
-
-% \newcounter{sdc}
-\newcommand{\skilldisk}[1]{%
- \hspace{.5em}%
- \def\R{.15cm}%
- \begin{tikzpicture}[remember picture]%
-  \pgfmathsetmacro\A{90-3.6*#1}
-  \def\bgcolor{gray!40}
-  \def\fgcolor{\sbcolor!50}
-  
-  \fill [white] (0,0) circle (\R);
-%   \draw [\bgcolor] (\A:\R) arc (\A:-270:\R);
-%   \draw [\fgcolor] (\A:\R) -- (0,0) -- (90:\R) arc (90:\A:\R) -- cycle;
-  
-  \shade[ball color = \bgcolor, opacity = 0.4] (0,0) circle (\R);
-  \shade[ball color = \fgcolor, opacity = 0.8] (0,\R) arc (90:\A:\R) -- (0,0) -- cycle;
-  
-%   \coordinate (SD\thesdc) at (0,0);
- \end{tikzpicture}%
-%  \tikz[remember picture, overlay] \draw (SD\thesdc) ++(0,5*\R) -- ++(0,-10*\R);%
-%  \stepcounter{sdc}
-}
-
-\def\skilllevel{\skillbar}
+% =============================================================================
+% Contents
 
 \begin{sect}{\Huge Kevin Godin-Dubois}
  \itm{Contact}{}{%
@@ -151,7 +154,7 @@
            & 31042 Toulouse, France & \faVimeo & \href{https://vimeo.com/godinduboisalife}{godinduboisalife} \\
 %    \addlinespace[.1cm]
    \faEnvelopeO & \mailto{godindubois@gmail.com} &
-     \faRefresh & \href{https://github.com/kgd-al/CV/raw/master/cv.pdf}{Up-to date version} 
+     \includegraphics{academicons_rgate} & \href{https://www.researchgate.net/profile/Kevin_Godin-Dubois2}{ResearchGate} \\     
   \end{tabular}
  }
  \\\\
@@ -183,8 +186,8 @@
  \itm{PhD}{2016 - July 2020}{%
   Toulouse University, France \\
   Thesis title: \emph{``Environment-driven speciation: long term interactions in artificial plant communities''} \\
-  { \small Investigated how complexification of artificial creatures could be further enhanced by moving the control apparatus around the abiotic component of an ecosystem } \\
-  \textbf{Contact:} Pr. Y. Duthen (\mailto{yves.duthen@irit.fr})
+  {\small Investigated how complexification of artificial creatures could be further enhanced by moving the control apparatus around the abiotic component of an ecosystem } \\
+  \textbf{Contact:} Pr. Y. Duthen (\mailto{Yves.Duthen@irit.fr})
  }
  \\
    
@@ -199,7 +202,8 @@
   {\small Computer science: Networks, Programming, Systems, Mathematics}
  }
 \end{sect}
- 
+
+% \newpage
 \begin{sect}{Experience}
  \itm{Teachings}{2017 - 2019}{
   Capitole University, Toulouse, France \\
@@ -215,17 +219,17 @@
  }
  \\
  
- \itm{Internship}{2016 (6 months)}{
-  Toulouse Research Institute on Computer Science (IRIT), France \\
-  \emph{``Rule-based artificial embryogenesis in a complex 3D environment''} \\
-  {\small Deployed rule-based genomes on the MecaCell platform to study artificial plant growth and cell specialization.}
+ \itm{Internship}{2016 (6 months)}{%
+  Toulouse Research Institute on Computer Science (IRIT), France \\%
+  \emph{``Rule-based artificial embryogenesis in a complex 3D environment''} \\%
+  {\small Deployed rule-based genomes on the MecaCell platform to study artificial plant growth and cell specialization.}%
  }
  \\
  
- \itm{Internship}{2015 (1 month)}{
+ \itm{Internship}{2015 (3 months)}{
   \emph{``Comparison of different evolutionary approaches, an application to the GECCO 2015 challenge''} \\
   {\small Performed a performance comparison (accuracy, efficiency) between Artificial Neural and Genetic Regulatory Networks on the 2015 GECCO temperature prediction challenge data.} \\
-  \textbf{Contact:} Pr. H. Luga (\mailto{herve.luga@irit.fr})
+  \textbf{Contact:} Pr. H. Luga (\mailto{Herve.Luga@irit.fr})
  }
  \\
  
@@ -257,7 +261,7 @@
  }
  
  \cols(Redaction){%
-  85/{\LaTeX / Ti\textit{k}Z},
+  85/{\LaTeX /Ti\textit{k}Z},
   75/Office Software
  }
  
@@ -287,15 +291,15 @@
 
 \newpage
 \begin{sect}[]{Research Output}
- \multicolumn{1}{m{\lwidth}}{} & \multicolumn{1}{m{\rwidth-11.6pt}}{}
+ \multicolumn{1}{m{\lwidth}}{} & \multicolumn{1}{m{\rwidth-11.6pt}}{} \\*
 \end{sect}%
 \vspace{-\baselineskip}
 \nocite{*}%
-\olditm{Pending publication}{}
+\textbf{Pending publication}
 \printbibliography[heading=none, type=unpublished]
-\olditm{Peer-reviewed publications}{}
+\textbf{Peer-reviewed publications}
 \printbibliography[heading=none, nottype=misc,nottype=unpublished]
-\olditm{Oral presentations}{}
+\textbf{Oral presentations}
 \printbibliography[heading=none, nottype=unpublished, subtype=talk]
 
 \end{document}

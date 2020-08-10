@@ -1,47 +1,52 @@
 \documentclass{article}
-\usepackage[utf8]{inputenc}
-\iffalse
-\usepackage[french]{babel}
-\usepackage[T1]{fontenc}
-\usepackage{csquotes}
-\def\Title{Publications en date du}
-\def\Orals{Pr\'esentations en Conf\'erence}
-\else
-\def\Title{Publications as of}
-\def\Orals{Conference Presentations}
-\fi
-\usepackage{array}
-\usepackage[backend=biber,maxcitenames=1,isbn=false,url=false]{biblatex}
-\addbibresource{thesis.bib}
+% \usepackage[utf8]{inputenc}
+\usepackage[showframe,margin=1in]{geometry}
+\usepackage[backend=biber,maxcitenames=1]{biblatex}
+\usepackage{multicol}
+\addbibresource{cv.bib}
 \newcommand{\docite}[1]{$\bullet$ \fullcite{#1}}
 \begin{document}
 \begingroup
  \centering 
  \vspace*{\baselineskip} 
- {\LARGE \Title\ \today}
+ {\LARGE Publications as of \today}
  \vspace*{1\baselineskip}
 \endgroup
 
-\renewcommand{\arraystretch}{1.2}
-\setlength{\tabcolsep}{0pt}
-\section{Publications}
-\begin{tabular}{m{.95\textwidth}}
- \\\textbf{2019} \\
- \docite{GodinDubois2019b} \\
- \docite{GodinDubois2019a} \\
+\nocite{*}
 
- \\\textbf{2017} \\
- \docite{Dubois2017}
-\end{tabular}
+\begin{multicols}{2}
+\small 
+\section*{Pending publication}
+\printbibliography[heading=none, type=unpublished]
 
-\section{\Orals}
+\section*{Peer-reviewed publications}
+\printbibliography[heading=none, nottype=misc,nottype=unpublished]
 
-\begin{tabular}{m{.95\textwidth}}
- \\\textbf{2019} \\
- \docite{GodinDubois2019c} \\
+\section*{Oral presentations}
+\printbibliography[heading=none, nottype=unpublished, subtype=talk]
+\end{multicols}
 
- \\\textbf{2018} \\
- \docite{GodinDubois2018}
-\end{tabular}
-
+% \renewcommand{\arraystretch}{1.2}
+% \setlength{\tabcolsep}{0pt}
+% \section{Publications}
+% \begin{tabular}{m{.95\textwidth}}
+%  \\\textbf{2019} \\
+%  \docite{GodinDubois2019b} \\
+%  \docite{GodinDubois2019a} \\
+% 
+%  \\\textbf{2017} \\
+%  \docite{Dubois2017}
+% \end{tabular}
+% 
+% \section{\Orals}
+% 
+% \begin{tabular}{m{.95\textwidth}}
+%  \\\textbf{2019} \\
+%  \docite{GodinDubois2019c} \\
+% 
+%  \\\textbf{2018} \\
+%  \docite{GodinDubois2018}
+% \end{tabular}
+% 
 \end{document}
