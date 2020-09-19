@@ -33,8 +33,21 @@
 \usepackage{makecell} % Encapsulated tabular cell contents
 
 % The list of publications (with links)
-\usepackage[backend=biber,maxcitenames=1,doi=false,isbn=false,url=false,sorting=ydnt]{biblatex}
+\usepackage[backend=biber,maxcitenames=1,doi=true,url=true,sorting=ydnt]{biblatex}
 \addbibresource{cv.bib}
+
+% Only use url if doi is not present
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map[overwrite]{
+      \step[fieldsource=doi, final]
+      \step[fieldset=url, null]
+      \step[fieldset=eprint, null]
+    }  
+  }
+}
+
+\usepackage{url}
 
 % The euro symbol
 \usepackage{eurosym}
