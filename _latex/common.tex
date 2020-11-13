@@ -1,0 +1,48 @@
+
+% Sets margins
+\usepackage[margin=1in]{geometry}
+
+% For hyperlinks, as usual
+\usepackage{hyperref}
+
+% The list of publications (with links)
+\usepackage[backend=biber,maxcitenames=1,doi=true,url=true,sorting=ydnt]{biblatex}
+\addbibresource{cv.bib}
+
+% Only use url if doi is not present
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map[overwrite]{
+      \step[fieldsource=doi, final]
+      \step[fieldset=url, null]
+      \step[fieldset=eprint, null]
+    }  
+  }
+}
+
+% Multiple language
+
+% % \providecommand{\kgdlang}{english}
+\providecommand{\kgdlang}{french}
+\usepackage[french,english,main=\kgdlang]{babel}
+\usepackage{csquotes}
+\usepackage{iflang}
+
+\def\En#1{#1}
+\def\Fr#1{}
+\IfLanguageName{french}{%
+ \def\En#1{}\def\Fr#1{#1}
+ \usepackage[T1]{fontenc}
+}{}
+
+\def\publipending{
+  \En{Pending publication}%
+  \Fr{Publications en cours}}
+
+\def\publipeerreviewed{
+  \En{Peer-reviewed publications}%
+  \Fr{Publications peer-reviewed}}
+
+\def\publioral{
+  \En{Oral presentations}%
+  \Fr{Pr\'esentations orales}}

@@ -1,15 +1,16 @@
 \documentclass{article}
-% \usepackage[utf8]{inputenc}
-\usepackage[margin=1in]{geometry}
-\usepackage[backend=biber,maxcitenames=1]{biblatex}
+\input{common}
+
 \usepackage{multicol}
-\addbibresource{cv.bib}
+
 \newcommand{\docite}[1]{$\bullet$ \fullcite{#1}}
+
 \begin{document}
 \begingroup
- \centering 
- \vspace*{\baselineskip} 
- {\LARGE Publications as of \today}
+ \centering
+ \vspace*{\baselineskip}
+ \En{\LARGE Publications as of \today}
+ \Fr{\LARGE Publications en date du \today}
  \vspace*{1\baselineskip}
 \endgroup
 
@@ -17,36 +18,14 @@
 
 \begin{multicols}{2}
 \small 
-\section*{Pending publication}
+\section*{\publipending}
 \printbibliography[heading=none, type=unpublished]
 
-\section*{Peer-reviewed publications}
+\section*{\publipeerreviewed}
 \printbibliography[heading=none, nottype=misc,nottype=unpublished]
 
-\section*{Oral presentations}
+\section*{\publioral}
 \printbibliography[heading=none, nottype=unpublished, subtype=talk]
 \end{multicols}
 
-% \renewcommand{\arraystretch}{1.2}
-% \setlength{\tabcolsep}{0pt}
-% \section{Publications}
-% \begin{tabular}{m{.95\textwidth}}
-%  \\\textbf{2019} \\
-%  \docite{GodinDubois2019b} \\
-%  \docite{GodinDubois2019a} \\
-% 
-%  \\\textbf{2017} \\
-%  \docite{Dubois2017}
-% \end{tabular}
-% 
-% \section{\Orals}
-% 
-% \begin{tabular}{m{.95\textwidth}}
-%  \\\textbf{2019} \\
-%  \docite{GodinDubois2019c} \\
-% 
-%  \\\textbf{2018} \\
-%  \docite{GodinDubois2018}
-% \end{tabular}
-% 
 \end{document}

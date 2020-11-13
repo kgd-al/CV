@@ -1,7 +1,5 @@
 \documentclass[a4paper,12pt]{article}
-
-% Sets margins
-\usepackage[margin=1in]{geometry}
+\input{common.tex}
 
 % To draw the skill circles
 \usepackage{tikz}
@@ -24,28 +22,10 @@
  \end{tikzpicture}%
 }
 
-% For hyperlinks, as usual
-\usepackage{hyperref}
-
 % Main tabular layout
 % \usepackage{booktabs} % Surprisingly un-used here
 \usepackage{longtable} % Pagebreak-able tables
 \usepackage{makecell} % Encapsulated tabular cell contents
-
-% The list of publications (with links)
-\usepackage[backend=biber,maxcitenames=1,doi=true,url=true,sorting=ydnt]{biblatex}
-\addbibresource{cv.bib}
-
-% Only use url if doi is not present
-\DeclareSourcemap{
-  \maps[datatype=bibtex]{
-    \map[overwrite]{
-      \step[fieldsource=doi, final]
-      \step[fieldset=url, null]
-      \step[fieldset=eprint, null]
-    }  
-  }
-}
 
 \usepackage{url}
 
@@ -69,9 +49,10 @@
  
 \fancypagestyle{fancyfirst}{
  \fancyhead{}
- \fancyfoot[L]{\fancysize Updated on \today{}}
- \fancyfoot[C]{\fancysize \faRefresh \href{https://github.com/kgd-al/CV/raw/master/cv.pdf}{Up-to date version}}
- \fancyfoot[R]{\fancysize \footnotesize Page \thepage\ of \pageref*{LastPage}}
+ \fancyfoot[L]{\fancysize \En{Updated on} \today{}}
+ \fancyfoot[C]{\fancysize \faRefresh \href{https://github.com/kgd-al/CV/raw/master/cv.pdf}{\En{Up-to date version}%
+                                                                                           \Fr{Version \`a jour (Anglais)}}}
+ \fancyfoot[R]{\fancysize \footnotesize Page \thepage\ \En{of}\Fr{sur} \pageref*{LastPage}}
 }
 
 \renewcommand{\headrulewidth}{0pt}
@@ -92,7 +73,8 @@
 \def\mailto#1{\small\href{mailto:#1}{\texttt{#1}}}
 
 % Pdf meta-data
-\def\me{Kevin Godin-Dubois}
+\En{\def\me{Kevin Godin-Dubois}}
+\Fr{\def\me{K\'evin Godin-Dubois}}
 \makeatletter
 \hypersetup{
  pdfinfo={
@@ -158,13 +140,15 @@
 % =============================================================================
 % Contents
 
-\begin{sect}{\Huge Kevin Godin-Dubois}
+\begin{sect}{\Huge \me}
  \itm{Contact}{}{%
   \centering\begin{tabular}[t]{c@{ }m{.35\textwidth}c@{ }m{.3\textwidth}}
-   \faHome & University of Toulouse & \faPhone & +33 5 67 06 93 91 \\
-           & IRIT - CNRS UMR 5505   & \faMobile & +33 6 18 72 09 06 \\
+   \faHome & \En{Toulouse University}
+             \Fr{Toulouse I Capitole}
+                                          & \faPhone & +33 5 67 06 93 91 \\
+           & IRIT - CNRS UMR 5505         & \faMobile & +33 6 18 72 09 06 \\
            & 2 rue du Doyen Gabriel Marty & \faGithub & \href{https://github.com/kgd-al}{kgd-al@github.com} \\
-           & 31042 Toulouse, France & \faVimeo & \href{https://vimeo.com/godinduboisalife}{godinduboisalife} \\
+           & 31042 Toulouse, France       & \faVimeo & \href{https://vimeo.com/godinduboisalife}{godinduboisalife} \\
 %    \addlinespace[.1cm]
    \faEnvelopeO & \mailto{godindubois@gmail.com} &
      \includegraphics{misc/academicons_rgate} & \href{https://www.researchgate.net/profile/Kevin_Godin-Dubois2}{ResearchGate} \\     
@@ -173,82 +157,142 @@
  \\\\
  
  \itm{Synopsis}{}{
-  {\centering\large \emph{A-Life Researcher on the Emergence of Cognition}}%
-  \\\small
-  After a PhD thesis focused on artificial plant-like lifeforms and their dynamics at the evolutionary scale, I plan on returning to my core interest: artificial cognition.
-  More specifically, my objectives are to investigate the mechanisms by which high-level forms of interaction can be built upon low-level inputs/outputs, especially in response to environmental constraints.
+  {\centering\large \emph{%
+    \En{A-Life Researcher on the Emergence of Cognition}%
+    \Fr{Vie Artificielle et \'emergence de la cognition}%
+  }}%
+  \\\small%
+  \En{After a PhD thesis focused on artificial plant-like lifeforms and their dynamics at the evolutionary scale, I plan on returning to my core interest: artificial cognition.
+  More specifically, my objectives are to investigate the mechanisms by which high-level forms of interaction can be built upon low-level inputs/outputs, especially in response to environmental constraints.}
+  \Fr{Suite \`a un doctorat centr\'e sur des plantes artificielles et leurs dynamiques \`a l'\'echelle \'evolutionaire, je projete de revenir \`a mon int\'er\^et principal: la cognition artificielle.
+  Plus pr\'ecis\'ement, mes objectifs sont d'\'etudier les m\'ecanismes par lesquels des formes d'interaction haut-niveau peuvent \^etre construites \`a travers des entr\'ees/sorties bas niveau, particuli\`erement en r\'eponse \`a des contraintes environnementales.}
  }%
  \\
  
- \itm{Interests}{}{%
+ \itm{\En{Interests}\Fr{Int\'er\^ets}}{}{%
  \hfill
- \foreach \i/\l in {mew/Morphogenetic Engineering\cite{Dubois2017},
-                    phylogenetics_colored/{Species Dynamics}\cite{GodinDubois2019b,GodinDubois2019c},
-                    splinoids_combat/Artificial Cognition\cite{GodinDubois2020b}} {
+ \foreach \i/\lEn/\lFr/\c in {mew/Morphogenetic Engineering/Morphogenetic Engineering/Dubois2017,
+                    phylogenetics_colored/Species Dynamics/Phylog\'enie/{GodinDubois2019b,GodinDubois2019c},
+                    splinoids_combat/Artificial Cognition/Cognition artificielle/GodinDubois2020b} {
   \begin{minipage}[t]{.2\textwidth}
    \centering
    \includegraphics[width=\textwidth]{annexes/\i} \\
-   \l
+   \En{\lEn}\Fr{\lFr}\cite{\c}
   \end{minipage}
   \hfill
  } 
  }
 \end{sect}
 
-\begin{sect}{Education}
- \itm{PhD}{2016 - July 2020}{%
-  Toulouse University, France \\
-  Thesis title: \emph{``Environment-driven speciation: long term interactions in artificial plant communities''} \\
-  {\small Investigated how complexification of artificial creatures could be further enhanced by moving the control apparatus around the abiotic component of an ecosystem } \\
+\def\UnivUPS{%
+  \En{Toulouse University, France}%
+  \Fr{Universit\'e Paul Sabatier, France}%
+}
+
+\begin{sect}{\En{Education}\Fr{\'Education}}
+ \itm{PhD}{2016 - \En{July} 2020}{%
+  \UnivUPS
+  \\
+  \En{Thesis title: \emph{``Environment-driven speciation: long term interactions in artificial plant communities''}}
+  \Fr{Th\`ese: \emph{``Sp\'eciation guid\'ee par l'environnement: interactions \`a long terme de communaut\'es de plantes artificielles''}}
+  \\
+  {\small%
+    \En{Investigated how complexification of artificial creatures could be further enhanced by moving the control apparatus around the abiotic component of an ecosystem}%
+    \Fr{\'Etude sur la mani\`ere dont la complexification de cr\'eatures artificielles pourrait \^etre am\'elior\'ee par la d\'eplacement des controlleurs autour du composant abiotique d'un \'ecosyst\`eme}
+  } \\
   \textbf{Contact:} Pr. Y. Duthen (\mailto{Yves.Duthen@irit.fr})
  }
  \\
    
  \itm{Master}{2014 - 2016}{
-  Toulouse University, France \\
-  {\small Artificial intelligence: mathematical \& symbolic models, training methods}
+  \UnivUPS
+  \\
+  {\small%
+    \En{Artificial intelligence: mathematical \& symbolic models, training methods}%
+    \Fr{Intelligence artificielle: mod\`eles math\'ematiques et symboliques, m\'ethodes d'entrainement}
+  }
  }
  \\
  
  \itm{Bachelor}{2011 - 2014}{
-  Toulouse University, France \\
-  {\small Computer science: Networks, Programming, Systems, Mathematics}
+  \UnivUPS
+  \\
+  {\small%
+    \En{Computer science: Networks, Programming, Systems, Mathematics}%
+    \Fr{Informatique: R\'eseaux, Programmation, Syst\`emes, Math\'ematiques}
+  }
  }
 \end{sect}
 
-% \newpage
-\begin{sect}{Experience}
- \itm{Teachings}{2017 - 2019}{
-  Capitole University, Toulouse, France \\
-  \di L2 Excel and Visual Basic for Applications \\
-  \di L2 Algorithms and Visual Basic \\
-  \di L3 Modeling in Database \\
+\Fr{\newpage}
+
+\def\teachings{\En{Teachings}\Fr{Enseignements}}
+\def\internship{\En{Internship}\Fr{Stage}}
+\def\months{\En{months}\Fr{mois}}
+\begin{sect}{\En{Experience}\Fr{Exp\'erience}}
+ \itm{\teachings}{2017 - 2019}{
+  \En{Capitole University}%
+  \Fr{Universit\'e Toulouse I Capitole}%
+    , Toulouse, France \\
+  \di L2 \En{Excel and Visual Basic for Applications}%
+         \Fr{Excel et Visual Basic pour Applications}%
+  \\
+  \di L2 \En{Algorithms and Visual Basic}%
+         \Fr{Algorithmes et Visual Basic}%
+  \\
+  \di L3 \En{Modeling in Database}%
+         \Fr{Mod\'elisation en Base de donn\'ees}%
+  \\
  }
  \\
  
- \itm{Teachings}{2016 - 2017}{%
-  Paul Sabatier University, Toulouse, France \\
-  \di L2 project monitoring on C programming \\
+ \itm{\En{Teachings}\Fr{Enseignements}}{2016 - 2017}{%
+  \En{Paul Sabatier University}%
+  \Fr{Universit\'e Paul Sabatier}%
+    , Toulouse, France \\
+  \di L2 \En{project monitoring on C programming}%
+         \Fr{Encadrement de projet de programmation en C}%
+  \\
  }
  \\
  
- \itm{Internship}{2016 (6 months)}{%
-  Toulouse Research Institute on Computer Science (IRIT), France \\%
-  \emph{``Rule-based artificial embryogenesis in a complex 3D environment''} \\%
-  {\small Deployed rule-based genomes on the MecaCell platform to study artificial plant growth and cell specialization.}%
+ \itm{\internship}{2016 (6 \months)}{%
+  \En{Toulouse Research Institute on Computer Science (IRIT)}%
+  \Fr{Institut de Recherche en Informatique de Toulouse (IRIT)}%
+    , France \\%
+  \emph{%
+    \En{``Rule-based artificial embryogenesis in a complex 3D environment''}%
+    \Fr{``Embryogen\`ese artificielle dans un environnement 3D complexe''}%
+  } \\%
+  {\small%
+    \En{Deployed rule-based genomes on the MecaCell platform to study artificial plant growth and cell specialization.}%
+    \Fr{D\'eploiment de g\'enomes \`a base de r\`egles sur la plateforme MecaCell pour \'etudier la croissance de plantes et la sp\'ecialisation cellulaire.}%
+  }%
  }
  \\
  
- \itm{Internship}{2015 (3 months)}{
-  \emph{``Comparison of different evolutionary approaches, an application to the GECCO 2015 challenge''} \\
-  {\small Performed a performance comparison (accuracy, efficiency) between Artificial Neural and Genetic Regulatory Networks on the 2015 GECCO temperature prediction challenge data.} \\
+ \itm{\internship}{2015 (3 \months)}{
+  \emph{%
+    \En{``Comparison of different evolutionary approaches, an application to the GECCO 2015 challenge''}%
+    \Fr{``Comparaison d'approches \'evolutionnaires, une application au challenge GECCO 2015''}%
+  } \\
+  {\small%
+    \En{Performed a performance comparison (accuracy, efficiency) between Artificial Neural and Genetic Regulatory Networks on the 2015 GECCO temperature prediction challenge data.}%
+    \Fr{\'Etude sur les differences de performance entre R\'eseaux de Neurones Artificiels et R\'eseaux de R\'egulation G\'en\'etiques sur des donn\'ees de pr\'ediction de temp\'erature.}%
+  } \\
   \textbf{Contact:} Pr. H. Luga (\mailto{Herve.Luga@irit.fr})
  }
  \\
  
- \itm{Internship}{2014 (2 months)}{
-  \emph{``Conception of an architecture for automated bird discrimination''} \\
-  {\small Applied Hidden Markov Models to the BirdClef2014 challenge on the identification of specific bird species in a corpus of thousands of recordings.} \\
+ \itm{\internship}{2014 (2 \months)}{
+  \emph{%
+    \En{``Conception of an architecture for automated bird discrimination''}%
+    \Fr{``Conception d'une architecture pour la discrimination d'oiseaux''}%
+  } \\
+  {\small%
+    \En{Applied Hidden Markov Models to the BirdClef2014 challenge on the identification of specific bird species in a corpus of thousands of recordings.}%
+    \Fr{Application de Mod\`eles de Markov Cach\'es au challenge BirdClef2014 pour l'identification d'esp\`eces d'oiseaux dans un corpsus de plusieurs milliers d'enregistrements.}%
+  } \\
   \textbf{Contact:} Pr. J. Farnias (\mailto{Jerome.Farinas@irit.fr})
  }
 \end{sect}
@@ -262,57 +306,64 @@
  }%
 }
 \begin{sect}{Skills}
- \cols(Programming){%
+ \cols(\En{Programming}\Fr{\small Programmation}){%
   90/C++,
   80/{C, Java},
   70/Python}%
   
- \cols(Processing){%
+ \cols(\En{Processing}\Fr{Traitement}){%
   90/{Bash (sed, awk ...)},
   85/Gnuplot,
   70/{Octave/Matlab}
  }
  
- \cols(Redaction){%
+ \cols(\En{Redaction}\Fr{R\'edaction}){%
   85/{\LaTeX /Ti\textit{k}Z},
   75/Office Software
  }
  
- \cols(Systems){%
+ \cols(\En{Systems}\Fr{Syst\`emes}){%
   85/Linux,
   70/{Windows, Android}
  }
 
- \cols(Languages){%
+ \cols(\En{Languages}\Fr{Langues}){%
   95/French,
   90/English
  }
 \end{sect}
  
-\begin{sect}{Scholarships and Fellowships}
+\begin{sect}{\En{Scholarships and Fellowships}%
+             \Fr{Bourses}}
+             
  \itm{2016}{70K \euro}
-     {PhD Fellowship from the French Minister of Higher Education and Research (MESR) - over 3 years}
+     {\En{PhD Fellowship from the French Minister of Higher Education and Research (MESR) - over 3 years}%
+      \Fr{Bourse doctoral du Minist\`ere de l'enseignement sup\'erieur - sur 3 ans}}
  \\
  
  \itm{2015}{10K \euro}
-     {Master Scholarship from the International Mathematics and Computer Science Center (LabEx CIMI, Toulouse)}
+     {\En{Master Scholarship from the International Mathematics and Computer Science Center (LabEx CIMI, Toulouse)}%
+      \Fr{Bourse de master du Centre International de Math\'ematiques et Informatique (Labex CIMI, Toulouse)}}
  \\
      
  \itm{2014}{3K6 \euro}
-     {Merit Scholarship from the Regional Student Welfare Office (CROUS, Toulouse) - over 2 years}
+     {\En{Merit Scholarship from the Regional Student Welfare Office (CROUS, Toulouse) - over 2 years}%
+      \Fr{Bourses de m\'erite (CROUS, Toulouse) - sur 2 ans}}
 \end{sect}
 
-\newpage
-\begin{sect}[]{Research Output}
+\En{\newpage}
+
+\begin{sect}[]{\En{Research Output}%
+               \Fr{Production Scientifique}}
  \multicolumn{1}{m{\lwidth}}{} & \multicolumn{1}{m{\rwidth-11.6pt}}{} \\*
 \end{sect}%
 \vspace{-\baselineskip}
 \nocite{*}%
-\textbf{Pending publication}
+\textbf{\publipending}
 \printbibliography[heading=none, type=unpublished]
-\textbf{Peer-reviewed publications}
+\textbf{\publipeerreviewed}
 \printbibliography[heading=none, nottype=misc,nottype=unpublished]
-\textbf{Oral presentations}
+\textbf{\publioral}
 \printbibliography[heading=none, nottype=unpublished, subtype=talk]
 
 \end{document}
