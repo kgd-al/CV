@@ -1,5 +1,6 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,12pt,final]{article}
 \input{common.tex}
+\emergencystretch=2em
 
 % To draw the skill circles
 \usepackage{tikz}
@@ -44,7 +45,7 @@
 
 \def\fancysize{\small}
 
-\fancyfoot[C]{\fancysize \thepage\ of \pageref*{LastPage}}
+\fancyfoot[C]{\fancysize \thepage\ \En{of}\Fr{sur} \pageref*{LastPage}}
 \fancyhead{}
  
 \fancypagestyle{fancyfirst}{
@@ -159,13 +160,13 @@
  \itm{Synopsis}{}{
   {\centering\large \emph{%
     \En{A-Life Researcher on the Emergence of Cognition}%
-    \Fr{Vie Artificielle et \'emergence de la cognition}%
+    \Fr{Vie Artificielle et \'Emergence de la Cognition}%
   }}%
   \\\small%
   \En{After a PhD thesis focused on artificial plant-like lifeforms and their dynamics at the evolutionary scale, I plan on returning to my core interest: artificial cognition.
   More specifically, my objectives are to investigate the mechanisms by which high-level forms of interaction can be built upon low-level inputs/outputs, especially in response to environmental constraints.}
-  \Fr{Suite \`a un doctorat centr\'e sur des plantes artificielles et leurs dynamiques \`a l'\'echelle \'evolutionaire, je projete de revenir \`a mon int\'er\^et principal: la cognition artificielle.
-  Plus pr\'ecis\'ement, mes objectifs sont d'\'etudier les m\'ecanismes par lesquels des formes d'interaction haut-niveau peuvent \^etre construites \`a travers des entr\'ees/sorties bas niveau, particuli\`erement en r\'eponse \`a des contraintes environnementales.}
+  \Fr{Suite \`a un doctorat centr\'e sur des plantes artificielles et leurs dynamiques \`a l'\'echelle \'evolutionaire, je projette de revenir \`a mon int\'er\^et principal: la cognition artificielle.
+  Plus pr\'ecis\'ement, mon objectif est d'\'etudier les m\'ecanismes par lesquels des formes d'interaction de haut-niveau peuvent \^etre construites \`a travers des entr\'ees/sorties \'el\'ementaires, particuli\`erement en r\'eponse \`a des contraintes environnementales.}
  }%
  \\
  
@@ -173,7 +174,7 @@
  \hfill
  \foreach \i/\lEn/\lFr/\c in {mew/Morphogenetic Engineering/Morphogenetic Engineering/Dubois2017,
                     phylogenetics_colored/Species Dynamics/Phylog\'enie/{GodinDubois2019b,GodinDubois2019c},
-                    splinoids_combat/Artificial Cognition/Cognition artificielle/GodinDubois2020b} {
+                    splinoids_combat/Artificial Cognition/Cognition Artificielle/GodinDubois2020b} {
   \begin{minipage}[t]{.2\textwidth}
    \centering
    \includegraphics[width=\textwidth]{annexes/\i} \\
@@ -190,15 +191,15 @@
 }
 
 \begin{sect}{\En{Education}\Fr{\'Education}}
- \itm{PhD}{2016 - \En{July} 2020}{%
+ \itm{\En{PhD}\Fr{Doctorat}}{2016 - \En{July} 2020}{%
   \UnivUPS
   \\
   \En{Thesis title: \emph{``Environment-driven speciation: long term interactions in artificial plant communities''}}
   \Fr{Th\`ese: \emph{``Sp\'eciation guid\'ee par l'environnement: interactions \`a long terme de communaut\'es de plantes artificielles''}}
   \\
   {\small%
-    \En{Investigated how complexification of artificial creatures could be further enhanced by moving the control apparatus around the abiotic component of an ecosystem}%
-    \Fr{\'Etude sur la mani\`ere dont la complexification de cr\'eatures artificielles pourrait \^etre am\'elior\'ee par la d\'eplacement des controlleurs autour du composant abiotique d'un \'ecosyst\`eme}
+    \En{Investigated how complexification of artificial creatures could be further enhanced by moving the control apparatus around the abiotic component of an ecosystem.}%
+    \Fr{\'Etude sur la mani\`ere dont le complexification de cr\'eatures artificielles pourrait \^etre am\'elior\'ee par la d\'eplacement des contr\^oleurs autour du composant abiotique d'un \'ecosyst\`eme.}
   } \\
   \textbf{Contact:} Pr. Y. Duthen (\mailto{Yves.Duthen@irit.fr})
  }
@@ -208,18 +209,18 @@
   \UnivUPS
   \\
   {\small%
-    \En{Artificial intelligence: mathematical \& symbolic models, training methods}%
-    \Fr{Intelligence artificielle: mod\`eles math\'ematiques et symboliques, m\'ethodes d'entrainement}
+    \En{Artificial Intelligence: mathematical \& symbolic models, training methods}%
+    \Fr{Intelligence Artificielle: mod\`eles math\'ematiques et symboliques, m\'ethodes d'entra\^inement}
   }
  }
  \\
  
- \itm{Bachelor}{2011 - 2014}{
+ \itm{\En{Bachelor}\Fr{Licence}}{2011 - 2014}{
   \UnivUPS
   \\
   {\small%
-    \En{Computer science: Networks, Programming, Systems, Mathematics}%
-    \Fr{Informatique: R\'eseaux, Programmation, Syst\`emes, Math\'ematiques}
+    \En{Computer Science: networks, programming, systems, mathematics}%
+    \Fr{Informatique: r\'eseaux, programmation, syst\`emes, math\'ematiques}
   }
  }
 \end{sect}
@@ -251,7 +252,7 @@
   \Fr{Universit\'e Paul Sabatier}%
     , Toulouse, France \\
   \di L2 \En{project monitoring on C programming}%
-         \Fr{Encadrement de projet de programmation en C}%
+         \Fr{Encadrement de projets de programmation en C}%
   \\
  }
  \\
@@ -266,7 +267,7 @@
   } \\%
   {\small%
     \En{Deployed rule-based genomes on the MecaCell platform to study artificial plant growth and cell specialization.}%
-    \Fr{D\'eploiment de g\'enomes \`a base de r\`egles sur la plateforme MecaCell pour \'etudier la croissance de plantes et la sp\'ecialisation cellulaire.}%
+    \Fr{D\'eploiement de g\'enomes \`a base de r\`egles sur la plateforme MecaCell pour \'etudier la croissance de plantes et la sp\'ecialisation cellulaire.}%
   }%
  }
  \\
@@ -278,7 +279,7 @@
   } \\
   {\small%
     \En{Performed a performance comparison (accuracy, efficiency) between Artificial Neural and Genetic Regulatory Networks on the 2015 GECCO temperature prediction challenge data.}%
-    \Fr{\'Etude sur les differences de performance entre R\'eseaux de Neurones Artificiels et R\'eseaux de R\'egulation G\'en\'etiques sur des donn\'ees de pr\'ediction de temp\'erature.}%
+    \Fr{\'Etude sur les diff\'erences de performance entre R\'eseaux de Neurones Artificiels et R\'eseaux de R\'egulation G\'en\'etiques sur des donn\'ees de pr\'ediction de temp\'erature.}%
   } \\
   \textbf{Contact:} Pr. H. Luga (\mailto{Herve.Luga@irit.fr})
  }
@@ -291,7 +292,7 @@
   } \\
   {\small%
     \En{Applied Hidden Markov Models to the BirdClef2014 challenge on the identification of specific bird species in a corpus of thousands of recordings.}%
-    \Fr{Application de Mod\`eles de Markov Cach\'es au challenge BirdClef2014 pour l'identification d'esp\`eces d'oiseaux dans un corpsus de plusieurs milliers d'enregistrements.}%
+    \Fr{Application de Mod\`eles de Markov Cach\'es au challenge BirdClef2014 pour l'identification d'esp\`eces d'oiseaux dans un corpus de plusieurs milliers d'enregistrements.}%
   } \\
   \textbf{Contact:} Pr. J. Farnias (\mailto{Jerome.Farinas@irit.fr})
  }
@@ -305,7 +306,7 @@
   }%
  }%
 }
-\begin{sect}{Skills}
+\begin{sect}{\En{Skills}\Fr{Comp\'etences}}
  \cols(\En{Programming}\Fr{\small Programmation}){%
   90/C++,
   80/{C, Java},
@@ -328,8 +329,8 @@
  }
 
  \cols(\En{Languages}\Fr{Langues}){%
-  95/French,
-  90/English
+  95/\En{French}\Fr{Fran\c cais},
+  90/\En{English}\Fr{Anglais}
  }
 \end{sect}
  
@@ -338,7 +339,7 @@
              
  \itm{2016}{70K \euro}
      {\En{PhD Fellowship from the French Minister of Higher Education and Research (MESR) - over 3 years}%
-      \Fr{Bourse doctoral du Minist\`ere de l'enseignement sup\'erieur - sur 3 ans}}
+      \Fr{Bourse doctorale du Minist\`ere de l'Enseignement Sup\'erieur et de la Recherche - sur 3 ans}}
  \\
  
  \itm{2015}{10K \euro}
