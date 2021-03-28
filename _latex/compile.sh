@@ -20,7 +20,8 @@ pdfcompile(){
 clean(){
   n=$(tmpfiles | wc -l)
   echo "Deleting temporary files"
-  tmpfiles -print -delete
+  tmpfiles -print
+  tmpfiles -delete
   printf "> %d temporary files deleted\n\n" $n
 }
 
@@ -63,7 +64,8 @@ do
   fi
 done
 
-echo "Compiling for '$lang' language"
+lg=${lang:0:2}
+echo "Compiling for '$lang' [$lg] language"
 echo
 
 for f in {cv,publications}
@@ -74,9 +76,12 @@ do
   pdfcompile $f 
   
   echo
-  mv -v $f.pdf ../
+  o=${f}_${lg}.pdf
+  mv -v $f.pdf $o
   
-  if [ -f ../$f.pdf ]
+  [ "$lg" == "en" ] && cp -v $o ../$f.pdf
+  
+  if [ -f $o ]
   then
     printf "\033[32mCompiled file $f\033[0m\n\n"
   else

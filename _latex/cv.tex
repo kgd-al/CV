@@ -150,55 +150,74 @@
            & 2 rue du Doyen Gabriel Marty & \faGithub & \href{https://github.com/kgd-al}{kgd-al@github.com} \\
            & 31042 Toulouse, France       & \faVimeo & \href{https://vimeo.com/godinduboisalife}{godinduboisalife} \\
 %    \addlinespace[.1cm]
-   \faEnvelopeO & \mailto{godindubois@gmail.com} &
+   \faEnvelopeO & \mailto{kevin.dubois@irit.fr} &
      \includegraphics{misc/academicons_rgate} & \href{https://www.researchgate.net/profile/Kevin-Godin-Dubois}{ResearchGate} \\     
   \end{tabular}
  }
  \\\\
  
- \itm{Synopsis}{}{
+ \itm{Synopsis}{}{%
   {\centering\large \emph{%
     \En{A-Life Researcher on the Emergence of Cognition}%
     \Fr{Vie Artificielle et \'Emergence de la Cognition}%
   }}%
   \\\small%
   \En{After a PhD thesis focused on artificial plant-like lifeforms and their dynamics at the evolutionary scale, I am returning to my core interest: artificial cognition.
-  More specifically, I am investigating the mechanisms by which high-level forms of interaction (e.g. vocal communication) can be built upon low-level inputs/outputs thanks to (a)biotic constraints.}
-  \Fr{Suite \`a un doctorat centr\'e sur des plantes artificielles et leurs dynamiques \`a l'\'echelle \'evolutionaire, je projette de revenir \`a mon int\'er\^et principal: la cognition artificielle.
-  Plus pr\'ecis\'ement, mon objectif est d'\'etudier les m\'ecanismes par lesquels des formes d'interaction de haut-niveau peuvent \^etre construites \`a travers des entr\'ees/sorties \'el\'ementaires, particuli\`erement en r\'eponse \`a des contraintes environnementales.}
+  More specifically, I am investigating the mechanisms by which high-level forms of interaction (e.g. vocal communication) can be built upon low-level inputs/outputs thanks to (a)biotic constraints.}%
+  \Fr{Suite \`a un doctorat centr\'e sur des plantes artificielles et leurs dynamiques \`a l'\'echelle \'evolutionaire, je suis revenu \`a mon int\'er\^et principal: la cognition artificielle.
+  Plus pr\'ecis\'ement, j'\'etudie les m\'ecanismes par lesquels des formes d'interaction de haut-niveau (comme la communication) peuvent \^etre construites \`a travers des entr\'ees/sorties \'el\'ementaires, gr\^ace aux contraintes (a)biotiques.}
  }%
  \\
  
  \itm{\En{Interests}\Fr{Int\'er\^ets}}{}{%
  \hfill
  \foreach \i/\lEn/\lFr/\c in {mew/Morphogenetic Engineering/Morphogenetic Engineering/Dubois2017,
-                    phylogenetics_colored/Species Dynamics/Phylog\'enie/{GodinDubois2019b,GodinDubois2019c},
+                    phylogenetics_colored/Species Dynamics/Dynamiques d'esp\`eces/{GodinDubois2019b,GodinDubois2019c},
                     splinoids_combat/Artificial Cognition/Cognition Artificielle/GodinDubois2021a} {
   \begin{minipage}[t]{.2\textwidth}
    \centering
    \includegraphics[width=\textwidth]{annexes/\i} \\
-   \En{\lEn}\Fr{\lFr}\cite{\c}
+   \En{\lEn}\Fr{\lFr} \cite{\c}
   \end{minipage}
   \hfill
  } 
  }
 \end{sect}
 
-\def\UnivUPS{%
-  \En{Toulouse University, France}%
-  \Fr{Universit\'e Paul Sabatier, France}%
+% ========================================
+
+\def\UnivUPSShort{%
+  \En{Toulouse III University}%
+  \Fr{Universit\'e Toulouse III Paul Sabatier}%
 }
+\def\UnivUPS{\UnivUPSShort, France}
+
+% ========================================
+
+
+\def\UnivCapitoleShort{%
+  \En{Toulouse I University}%
+  \Fr{Universit\'e Toulouse I Capitole}%
+}
+\def\UnivCapitole{\UnivCapitoleShort, France}
+
+% ========================================
+
+% **Manual** layout alteration
+% \Fr{\vspace{2\baselineskip}}
 
 \begin{sect}{\En{Education}\Fr{\'Education}}
- \itm{\En{PhD}\Fr{Doctorat}}{2016 - \En{July} 2020}{%
-  \UnivUPS
+ \itm{\En{PhD}\Fr{Doctorat}}{2016 - 2020}{%
+  \UnivCapitole
   \\
   \En{Thesis title: \emph{``Environment-driven speciation: long term interactions in artificial plant communities''}}
   \Fr{Th\`ese: \emph{``Sp\'eciation guid\'ee par l'environnement: interactions \`a long terme de communaut\'es de plantes artificielles''}}
   \\
   {\small%
-    \En{Investigated how complexification of artificial creatures could be further enhanced by moving the control apparatus around the abiotic component of an ecosystem.}%
-    \Fr{\'Etude sur la mani\`ere dont le complexification de cr\'eatures artificielles pourrait \^etre am\'elior\'ee par la d\'eplacement des contr\^oleurs autour du composant abiotique d'un \'ecosyst\`eme.}
+    \En{Investigated how complexification of artificial creatures could be further enhanced through the indirect control provided by a co-evolved, highly dynamical environment.}%
+    \Fr{\'Etude sur la mani\`ere dont la complexification de cr\'eatures artificielles pourrait \^etre am\'elior\'ee gr\^ace au contr\^ole indirect exerc\'e par un environnement hautement dynamique et conjointement \'evolu\'e.}%
+%     \En{Investigated how complexification of artificial creatures could be further enhanced by moving the control apparatus around the abiotic component of an ecosystem.}%
+%     \Fr{\'Etude sur la mani\`ere dont la complexification de cr\'eatures artificielles pourrait \^etre am\'elior\'ee par le d\'eplacement des contr\^oleurs autour du composant abiotique d'un \'ecosyst\`eme.}
   } \\
   \textbf{Contact:} Pr. Y. Duthen (\mailto{Yves.Duthen@irit.fr})
  }
@@ -215,7 +234,7 @@
  \\
  
  \itm{\En{Bachelor}\Fr{Licence}}{2011 - 2014}{
-  \UnivUPS
+  \UnivUPSShort
   \\
   {\small%
     \En{Computer Science: networks, programming, systems, mathematics}%
@@ -224,16 +243,15 @@
  }
 \end{sect}
 
-\Fr{\newpage}
+% **Manual** layout alteration
+% \Fr{\newpage}
 
 \def\teachings{\En{Teachings}\Fr{Enseignements}}
 \def\internship{\En{Internship}\Fr{Stage}}
 \def\months{\En{months}\Fr{mois}}
 \begin{sect}{\En{Experience}\Fr{Exp\'erience}}
  \itm{\En{Teachings}\Fr{Enseignements}}{2021}{%
-  \En{Paul Sabatier University}%
-  \Fr{Universit\'e Paul Sabatier}%
-    , Toulouse, France \\
+  \UnivUPSShort \\
   \di L1 \En{C \& Python programmation, Information theory}%
          \Fr{Programmation C \& Python, Th\'eorie de l'information}%
   \\
@@ -241,13 +259,11 @@
          \Fr{Structure de donn\'ees (C), Encadrement de projets}%
   \\
  }
- \\
+ \En{\\}
  
  \itm{\teachings}{2017 - 2019}{
-  \En{Capitole University}%
-  \Fr{Universit\'e Toulouse I Capitole}%
-    , Toulouse, France \\
-  \di L2 \En{Excel and VBA, Algorithms}%
+  \UnivCapitoleShort \\
+  \di L2 \En{Excel and VBA, Algorithmic}%
          \Fr{Excel et VBA, Algorithmes}%
   \\
   \di L3 \En{Database Modeling}%
@@ -257,9 +273,7 @@
  \\
  
  \itm{\En{Teachings}\Fr{Enseignements}}{2016 - 2017}{%
-  \En{Paul Sabatier University}%
-  \Fr{Universit\'e Paul Sabatier}%
-    , Toulouse, France \\
+  \UnivUPSShort \\
   \di L2 \En{Projects monitoring}%
          \Fr{Encadrement de projets de programmation en C}%
   \\
@@ -277,12 +291,13 @@
   {\small%
     \En{Deployed rule-based genomes on the MecaCell platform to study artificial plant growth and cell specialization.}%
     \Fr{D\'eploiement de g\'enomes \`a base de r\`egles sur la plateforme MecaCell pour \'etudier la croissance de plantes et la sp\'ecialisation cellulaire.}%
-  }%
+  } \\
+  \textbf{Contact:} Pr. Y. Duthen (\mailto{Yves.Duthen@irit.fr})
  }
  \\
  
  \itm{\internship}{2015 (3 \months)}{
-  \emph{%
+  IRIT, \emph{%
     \En{``Comparison of different evolutionary approaches, an application to the GECCO 2015 challenge''}%
     \Fr{``Comparaison d'approches \'evolutionnaires, une application au challenge GECCO 2015''}%
   } \\
@@ -295,9 +310,9 @@
  \\
  
  \itm{\internship}{2014 (2 \months)}{
-  \emph{%
-    \En{``Conception of an architecture for automated bird discrimination''}%
-    \Fr{``Conception d'une architecture pour la discrimination d'oiseaux''}%
+  IRIT, \emph{%
+    \En{``An architecture for automated bird discrimination''}%
+    \Fr{``Architecture pour la discrimination automatique d'oiseaux''}%
   } \\
   {\small%
     \En{Applied Hidden Markov Models to the BirdClef2014 challenge on the identification of specific bird species in a corpus of thousands of recordings.}%
