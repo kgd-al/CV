@@ -384,13 +384,21 @@
 \end{sect}%
 \vspace{-\baselineskip}
 \nocite{*}%
-\textbf{\publipending}
-\printbibliography[heading=none, type=unpublished]
-\textbf{\publipeerreviewed}
-\printbibliography[heading=none, nottype=thesis, nottype=misc, nottype=unpublished]
-\textbf{\publioral}
-\printbibliography[heading=none, nottype=unpublished, subtype=talk]
-\textbf{\publithesis}
-\printbibliography[heading=none, type=thesis]
+% \textbf{\publipending}
+% \printbibliography[heading=none, type=unpublished]
+
+% \textbf{conference\publipeerreviewed}
+% \printbibliography[heading=none, subtype=conference]
+% \textbf{workshop}
+% \printbibliography[heading=none, subtype=workshop]
+% \textbf{\publioral}
+% \printbibliography[heading=none, subtype=talk]
+% \textbf{\publithesis}
+% \printbibliography[heading=none, subtype=thesis]
+
+\foreach \subtype/\en/\fr in \publiclasses {
+ \textbf{\En{\en}\Fr{\fr}}
+ \printbibliography[heading=none, subtype=\subtype] 
+}
 
 \end{document}
