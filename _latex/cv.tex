@@ -151,7 +151,7 @@
            & 31042 Toulouse, France       & \faVimeo & \href{https://vimeo.com/godinduboisalife}{godinduboisalife} \\
 %    \addlinespace[.1cm]
    \faEnvelopeO & \mailto{kevin.dubois@irit.fr} &
-     \includegraphics{misc/academicons_rgate} & \href{https://www.researchgate.net/profile/Kevin-Godin-Dubois}{ResearchGate} \\     
+     \includegraphics{misc/academicons_rgate} & \href{https://www.researchgate.net/profile/Kevin-Godin-Dubois}{ResearchGate} \\
   \end{tabular}
  }
  \\\\
@@ -406,6 +406,7 @@
 % \printbibliography[heading=none, subtype=thesis]
 
 \foreach \subtype/\en/\fr in \publiclasses {
+ \ifthenelse{\equal{\subtype}{thesis}}{\En{\newpage}}{}
  \textbf{\En{\en}\Fr{\fr}}
  \printbibliography[heading=none, subtype=\subtype] 
 }
