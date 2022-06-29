@@ -35,6 +35,7 @@ lang="english"
 clean=""
 cleanbefore=""
 cleanafter=""
+library=""
 OPTIND=1         # Reset in case getopts has been used previously in the shell.
 while getopts "h?l:abce:" opt; do
     case "$opt" in
@@ -53,18 +54,25 @@ while getopts "h?l:abce:" opt; do
     
     e)  library=$default_library
         [ "$OPTARG" != "default" ] && library="$OPTARG"
-        bib2bib -q -r -s year -s '$key' -c 'author : "GodinDubois, Kevin*" or author : "Dubois, Kevin"' $library |
-          grep -v -e "file =" -e "abstract =" | sed 's/type =/entrysubtype =/' |
-          sed 's/\(url = {.*\) .*}/\1}/' > cv.bib
-        echo "Extracted publications from $library"
-        echo
         ;;
     esac
 done
 
 
-[ ! -z "$clean" -a ! -z "$cleanbefore" ] && clean
+[ -n "$clean" -a -n "$cleanbefore" ] && clean
 
+if [ -n "$library" ]
+then
+  bib2bib -q -r -s year -s '$key' -c 'author : "GodinDubois, Kevin*" or author : "Dubois, Kevin"' $library |
+    grep -v -e "file =" -e "abstract =" | sed 's/type =/entrysubtype =/' |
+    sed 's|\(https://vimeo.*\)},|},\n  addendum = {{Presentation}: \\url{\1}},|' |
+    sed 's/\(url = {.*\) .*}/\1}/' | 
+    sed 's/{\\_}/_/g' > cv.bib
+  echo "Extracted publications from $library"
+  echo
+fi
+
+# exit 42
 
 for l in misc/academicons_rgate
 do

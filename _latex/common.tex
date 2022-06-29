@@ -1,6 +1,9 @@
 % Generic commands
 \usepackage{draftcommands}
 
+% Font encodings
+\usepackage[T1]{fontenc}
+
 % Sets margins
 \usepackage[lmargin=1in,rmargin=1in,bmargin=1in,tmargin=.75in]{geometry}
 
@@ -8,7 +11,7 @@
 \usepackage{hyperref}
 
 % The list of publications (with links)
-\usepackage[backend=biber,maxcitenames=1,doi=true,url=true,sorting=ydnt]{biblatex}
+\usepackage[backend=biber,maxcitenames=1,doi=true,url=true,sorting=ydnt,giveninits=true]{biblatex}
 \addbibresource{cv.bib}
 
 % Only use url if doi is not present
@@ -24,8 +27,8 @@
 
 % Multiple language
 
-% \providecommand{\kgdlang}{english}
-\providecommand{\kgdlang}{french}
+% \providecommand{\kgdlang}{french}
+\providecommand{\kgdlang}{english}
 \usepackage[french,english,main=\kgdlang]{babel}
 \usepackage{csquotes}
 \usepackage{iflang}
@@ -41,9 +44,23 @@
   \En{Pending publication}%
   \Fr{Publication en cours}}
 
-\def\publipeerreviewed{
-  \En{Peer-reviewed publications}%
-  \Fr{Publications revues par des pairs}}
+\def\publijournal{
+  \En{International Journal}%
+  \Fr{Journaux Internationaux}%
+  \ (peer-reviewed)}
+  
+\def\publiconference{
+  \En{International conferences}%
+  \Fr{Conf\'erences Internationales}%
+  \ (peer-reviewed)}
+  
+\def\publiworkshop{
+  \En{Workshops}%
+  \Fr{Workshops}}
+
+\def\publiposter{
+  \En{Poster}%
+  \Fr{Poster}}
 
 \def\publioral{
   \En{Oral presentations}%
@@ -54,10 +71,12 @@
   \Fr{Th\`ese}}
   
 \def\publiclasses{
- conference/International conferences/Conférences internationales (comité de lecture),
- workshop/International workshops/Workshops internationaux (comité de lecture),
- talk/Other (talks)/Autres (pr\'esentations),
- thesis/Thesis/Thèse
+ journal/\publijournal,
+ conference/\publiconference,
+ workshop/\publiworkshop,
+ poster/\publiposter,
+ talk/\publioral,
+ thesis/\publithesis
 }
 
 % Classification CNU 27

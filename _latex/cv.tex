@@ -96,9 +96,6 @@
 % Overfull hbox debugging
 \overfullrule=1mm
 
-% =============================================================================
-\begin{document}
-
 % Prepare lengths
 \newlength\lwidth
 \setlength\lwidth{.2\textwidth}
@@ -110,9 +107,6 @@
 % Local variables
 \newlength\titlewidth
 \newlength\titleoffset
-
-% Display width repartition
-% {\color{red}\rule{\lwidth}{1mm}}{\color{green}\rule{\cwidth}{1mm}}{\color{blue}\rule{\rwidth}{1mm}}
 
 \newenvironment{sect}[2][{\\*[0pt]}]{%
  \def\title{\Large\prettyuline{\texttt{\textbf{#2}}}}%
@@ -128,8 +122,19 @@
  \end{longtable}%
 }%
 
+\def\dbgrule{}
+% \def\dbgrule{\hline}
 \newcommand{\itm}[3]{%
- \makecell[t{p{\lwidth}}]{\hfill \textbf{#1} \\ \hfill #2} & \makecell[t{p{\rwidth}}]{#3} \\
+\dbgrule%
+ \makecell[t{p{\lwidth}}]{%
+  \raggedleft%
+  \ifx\hfuzz#1\hfuzz\else%
+   \textbf{#1}%
+   \ifx\hfuzz#2\hfuzz\else\\\fi%
+  \fi%
+  #2%
+ } & \makecell[t{p{\rwidth}}]{#3} \\
+\dbgrule
 }
 
 \def\di{$\bullet$\ }
@@ -137,161 +142,269 @@
 \renewcommand{\labelitemi}{\di}
 \renewcommand{\labelitemii}{\dii}
 
-% =============================================================================
-% Contents
-
-\begin{sect}{\Huge \me}
- \itm{Contact}{}{%
-  \centering\begin{tabular}[t]{c@{ }m{.35\textwidth}c@{ }m{.3\textwidth}}
-   \faHome & \En{Toulouse University}
-             \Fr{Toulouse I Capitole}
-                                          & \faPhone & +33 5 67 06 93 91 \\
-           & IRIT - CNRS UMR 5505         & \faMobile & +33 6 18 72 09 06 \\
-           & 2 rue du Doyen Gabriel Marty & \faGithub & \href{https://github.com/kgd-al}{kgd-al@github.com} \\
-           & 31042 Toulouse, France       & \faVimeo & \href{https://vimeo.com/godinduboisalife}{godinduboisalife} \\
-%    \addlinespace[.1cm]
-   \faEnvelopeO & \mailto{kevin.dubois@irit.fr} &
-     \includegraphics{misc/academicons_rgate} & \href{https://www.researchgate.net/profile/Kevin-Godin-Dubois}{ResearchGate} \\
-  \end{tabular}
- }
- \\\\
- 
- \itm{Synopsis}{}{%
-  {\centering\large \emph{%
-    \En{A-Life Researcher on the Emergence of Cognition}%
-    \Fr{Vie Artificielle et \'Emergence de la Cognition}%
-  }}%
-  \\\small%
-  \En{After a PhD thesis focused on artificial plant-like lifeforms and their dynamics at the evolutionary scale, I am returning to my core interest: artificial cognition.
-  More specifically, I am investigating the mechanisms by which high-level forms of interaction (e.g. vocal communication) can be built upon low-level inputs/outputs thanks to (a)biotic constraints.}%
-  \Fr{Suite \`a un doctorat centr\'e sur des plantes artificielles et leurs dynamiques \`a l'\'echelle \'evolutionaire, je suis revenu \`a mon int\'er\^et principal: la cognition artificielle.
-  Plus pr\'ecis\'ement, j'\'etudie les m\'ecanismes par lesquels des formes d'interaction de haut-niveau (comme la communication) peuvent \^etre construites \`a travers des entr\'ees/sorties \'el\'ementaires, gr\^ace aux contraintes (a)biotiques.}
- }%
- \\
- 
- \itm{\En{Interests}\Fr{Int\'er\^ets}}{}{%
- \hfill
- \foreach \i/\lEn/\lFr/\c in {mew/Morphogenetic Engineering/Morphogenetic Engineering/Dubois2017,
-                    phylogenetics_colored/Species Dynamics/Dynamiques d'esp\`eces/{GodinDubois2019b,GodinDubois2019c},
-                    splinoids_combat/Artificial Cognition/Cognition Artificielle/GodinDubois2021a} {
-  \begin{minipage}[t]{.2\textwidth}
-   \centering
-   \includegraphics[width=\textwidth]{annexes/\i} \\
-   \En{\lEn}\Fr{\lFr} \cite{\c}
-  \end{minipage}
-  \hfill
- } 
- }
-\end{sect}
-
 % ========================================
-
 \def\UnivUPSShort{%
   \En{Toulouse III University}%
   \Fr{Universit\'e Toulouse III Paul Sabatier}%
 }
 \def\UnivUPS{\UnivUPSShort, France}
-
 % ========================================
-
-
 \def\UnivCapitoleShort{%
   \En{Toulouse I University}%
   \Fr{Universit\'e Toulouse I Capitole}%
 }
 \def\UnivCapitole{\UnivCapitoleShort, France}
+% ========================================
+
+% ========================================
+% Format skills
+\newcommand{\formatskill}[2]{\skilldisk{#2} \small#1}
+\def\cols(#1)#2{%
+ \itm{}{#1}{%
+  \foreach \p/\l in {#2} {%
+   \begin{minipage}{.32\rwidth}\formatskill{\l}{\p}\end{minipage}%
+  }%
+ }%
+}
 
 % ========================================
 
-% **Manual** layout alteration
-% \Fr{\vspace{2\baselineskip}}
+% \usepackage{showframe}
 
-\begin{sect}{\En{Education}\Fr{\'Education}}
- \itm{\En{PhD}\Fr{Doctorat}}{2016 - 2020}{%
-  \UnivCapitole
-  \\
-  \En{Thesis title: \emph{``Environment-driven speciation: long term interactions in artificial plant communities''}}
-  \Fr{Th\`ese: \emph{``Sp\'eciation guid\'ee par l'environnement: interactions \`a long terme de communaut\'es de plantes artificielles''}}
-  \\
-  {\small%
-    \En{Investigated how complexification of artificial creatures could be further enhanced through the indirect control provided by a co-evolved, highly dynamical environment.}%
-    \Fr{\'Etude sur la mani\`ere dont la complexification de cr\'eatures artificielles pourrait \^etre am\'elior\'ee gr\^ace au contr\^ole indirect exerc\'e par un environnement hautement dynamique et conjointement \'evolu\'e.}%
-%     \En{Investigated how complexification of artificial creatures could be further enhanced by moving the control apparatus around the abiotic component of an ecosystem.}%
-%     \Fr{\'Etude sur la mani\`ere dont la complexification de cr\'eatures artificielles pourrait \^etre am\'elior\'ee par le d\'eplacement des contr\^oleurs autour du composant abiotique d'un \'ecosyst\`eme.}
-  } \\
-  \textbf{Contact:} Pr. Y. Duthen (\mailto{Yves.Duthen@irit.fr})
+% Display width repartition
+\def\dbgshowwidths{
+ \tikz [remember picture, overlay]
+  \node at (current page.north) [anchor=north]
+   {{\color{red}\rule{\lwidth}{1mm}}{\color{green}\rule{\cwidth}{1mm}}{\color{blue}\rule{\rwidth}{1mm}}};
+}
+\reversemarginpar
+\def\ok{\marginpar{\tikz\fill[green,draw=green!50!black,scale=1](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}}
+
+
+% =============================================================================
+% Contents
+% =============================================================================
+\begin{document}
+% \dbgshowwidths%
+\vspace{-1\baselineskip}
+\ok
+\begin{sect}{\Huge Dr.\enspace\me}
+ \itm{Contact}{}{%
+  \centering\begin{tabular}[t]{c@{ }m{.35\textwidth}c@{ }m{.3\textwidth}}
+   \faHome & \En{Toulouse University}
+             \Fr{Toulouse I Capitole}
+                                          & \faEnvelopeO & \mailto{kevin.dubois@irit.fr} \\
+           & IRIT - CNRS UMR 5505         & \faGithub & \href{https://github.com/kgd-al}{kgd-al@github.com} \\
+           & 2 rue du Doyen Gabriel Marty & \faVimeo & \href{https://vimeo.com/godinduboisalife}{godinduboisalife} \\
+           & 31042 Toulouse, France       & \includegraphics{misc/academicons_rgate}
+                                            & \href{https://www.researchgate.net/profile/Kevin-Godin-Dubois}{ResearchGate}
+  \end{tabular}
  }
- \\
-   
- \itm{Master}{2014 - 2016}{
-  \UnivUPS
-  \\
-  {\small%
-    \En{Artificial Intelligence: mathematical \& symbolic models, training methods}%
-    \Fr{Intelligence Artificielle: mod\`eles math\'ematiques et symboliques, m\'ethodes d'entra\^inement}
-  }
+ \\[-.5em]
+ \itm{Since 2021}{}{Temporary Lecturer and Research Assistant}
+\end{sect}
+
+\ok
+\begin{sect}{Highlights}
+ \itm{\En{Research}\Fr{Recherche}}{}{%
+  \large\emph{\En{Artificial Life: Cognition, Interaction \& Language}}
+ }
+ \\[-.5em]
+ 
+ \itm{}{\En{Main fields}\\}{%
+  \hfill
+  \foreach \i/\lEn/\lFr in
+   {ann_vfmri_colored/Artificial Neural Networks/??,
+    phylogenetics_colored/Species Dynamics/Dynamiques d'esp\`eces,
+    splinoids_morphos/Morphogenetic Engineering/Morphogenetic Engineering} {
+   \begin{minipage}[t]{.22\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{annexes/\i} \\
+    \small\En{\lEn}\Fr{\lFr}
+   \end{minipage}
+   \hfill
+  } 
+ }
+ \\[-.25em]
+ 
+ \itm{}{\En{Publications}}{%
+  1 journal article (\emph{Artificial Life}, in press) \\
+  4 international conference articles (\emph{ALife, IEEE ALife, EvoAPP})\\
+  4 international workshops short submissions (\emph{ALife, ECAL})%\\
+%   1 poster (\emph{ALife})
+ }
+ \\[-.5em]
+ 
+ \itm{}{\En{Thesis}}{%
+  Computer Science / Artificial Life \\
+  \emph{``Environment-driven speciation: long term interactions in artificial plant communities''} \\
+  REVA Team, IRIT - \UnivCapitole \\
+  Supervisors: Pr. Y. Duthen \hfill(\mailto{yves.duthen@irit.fr}) \\
+  \phantom{Supervisors: }Pr. S. Cussat-Blanc \hfill(\mailto{sylvain.cussat-blanc@irit.fr})
+ }
+ \\[.5em]
+ 
+ \itm{\En{Teaching}}{}{5 years (492 hours)}
+ \\[-.5em]
+ 
+ \itm{}{Computer\\ Science}{
+  Programming languages: Python, C, R \\
+  Algorithms, Data Structures, Information theory \\
+  Programming projects
+ }
+ \\[-.5em]
+ 
+ \itm{}{Generalists}{
+  Data Science tools and languages \\
+  Database modeling, SQL
+ }
+ \\[.5em]
+ 
+ \itm{Skills}{}{}
+ \itm{}{Programming}{
+  Fluent: \cpp, Bash, Python, \LaTeX \\
+  Working Knowledge: C, Java, R, VB, VBA
+ }\\[-.75em]
+ \itm{}{Technical}{Evolutionary Algorithms, Machine Learning, Multi-Agents Systems, High-Performance Computing}
+ \\[-.75em]
+ \itm{}{Languages}{French (Mother tongue), English (Fluent - 980/990 at the TOEIC)}
+\end{sect}
+\newpage
+
+\newcommand{\ritm}[5]{%
+ \itm{}{%
+  \begin{minipage}[t]{\lwidth}%
+   \vspace{0pt}%
+   \raggedleft
+   \includegraphics[width=\textwidth, height=4em, keepaspectratio]{annexes/#1}%
+  \end{minipage}%
+ }{%
+  \begin{minipage}[t]{\rwidth}%
+   \vspace{0pt}\small%
+   \cite{#4} \textsc{\En{#2}\Fr{#3}} \\%
+   #5%
+  \end{minipage}%
+ }
+}
+\newcommand{\sref}[3][Software]{\textbf{#1:} \href{#2}{#3}}
+\begin{sect}{Research}
+ \itm{Synopsis}{}{%
+  \small My main interests revolve around the production of autonomous artificial life forms: from the autonomous design of efficient morphologies to the emergence of high-level control schemes and the evolutionary constraints that favor both.
+  The former and latter were investigated throughout my thesis whereas my more recent work deals with Artificial Neural Networks (ANN), with a special focus on the transition from communication to language and its neural implementation.
+%   After a PhD thesis focused on artificial plant-like lifeforms and their dynamics at the evolutionary scale, I am returning to my core interest: artificial cognition.
+%   More specifically, I am investigating the mechanisms by which high-level forms of interaction (e.g. vocal communication) can be built upon low-level inputs/outputs thanks to (a)biotic constraints.
  }
  \\
  
- \itm{\En{Bachelor}\Fr{Licence}}{2011 - 2014}{
-  \UnivUPSShort
-  \\
-  {\small%
-    \En{Computer Science: networks, programming, systems, mathematics}%
-    \Fr{Informatique: r\'eseaux, programmation, syst\`emes, math\'ematiques}
-  }
+ \itm{Artificial Neural Networks}{}{
+  Studying the emergence of various ``cognitive'' capabilities in virtual robots, controlled by a spontaneously differentiated neural network, in response to biologically plausible stimuli.
+ }
+ \ritm{ann_vfmri_colored}{Virtual fMRI}{IRMf virtuelle}{GodinDubois2021a,GodinDubois2023a}{
+  Extracting stimulus-specific regions of an ANN by applying a virtual equivalent to functional Magnetic Resonance Imaging (fMRI) and building high-level cognitive maps. \\
+  \sref{https://github.com/kgd-al/ES-HyperNEAT}{ES-HyperNEAT} (Custom implementation)
+ }
+%  \ritm{mew}{Species dynamics}{Dynamiques d'esp\`eces}{GodinDubois2019b}{}
+ \ritm{communication}{Communication}{Communication}{GodinDubois2021b,GodinDubois2022a}{
+  Exploring the mechanisms leading to emergent communication, how it becomes structured and its neural implementation.
+ }
+ \\[.5em]
+
+ \itm{Species Dynamics}{}{
+  Promoting complex evolutionary trajectories and extracting species-level information from individual reproductions. 
+ }
+ \ritm{phylogenetics_colored}{Phylogenetics}{Phylog\'en\'etiques}{GodinDubois2018u,GodinDubois2019c}{
+  Automatically transforming genealogic trees into phylogenetic abstraction to access the emergent species-level dynamics. \\
+  \sref{https://github.com/kgd-al/APOGeT}{APOGeT}{(Automated Phylogeny Over Geological Timescales)}
+ }
+ \ritm{species_dynamics}{Speciation}{Dynamiques d'esp\`eces}{GodinDubois2019b}{
+  Application of a bio-inspired reproduction operator (Bail-Out Crossover) capable of spontaneously generating species barriers thereby allowing for emergent speciation.
+ }
+ \ritm{edens_algo}{Evolutionary algorithms}{Algorithmes \'evolutionnaires}{GodinDubois2020a,GodinDuboisThesis}{
+  Introduced a novel paradigm, EDEnS (Environment-Driven Evolutionary Selection), relying on the indirect controlling of whole populations' evolutionary trajectories through an evolvable environmental controller.
+ }
+ \\[.5em]
+
+ \itm{Morphogenetic Engineering}{}{
+  Concerned with the development of functional morphology in response to environmental constraints and evolutionary pressures.
+ }
+ \ritm{mew}{Developmental morphologies}{Morphologies d\'evelopementales}{Dubois2017,GodinDubois2020a,GodinDubois2019a,GodinDubois2018u}{
+  Production of mature, functional virtual plants from a single cell/structure using various genetic encodings (rules-based, L-Systems, Graphtals) in response to environmental constraints.
+ }
+ \ritm{splinoid_morpho}{Virtual robots}{Robot virtuels}{GodinDubois2023a} {
+  Use of genetically parameterized cubic b\'ezier curves to control both static and mobile structures on the perimeter of virtual circular robots. \\
+  \sref{https://github.com/kgd-al/Splinoids}{Splinoids} \hfill 
+  \sref[Videos]{https://vimeo.com/showcase/9613894}{on Vimeo} \hfill\null
+ }
+%  \\[.5em]
+
+ \itm{Expertise}{}{}
+ \\[-.5em]
+ \itm{}{Evolutionary Algorithms}{
+  \di Environment-Driven Evolutionary Selection (EDEnS) \\
+  \di Multi-objective Optimisation \\
+  \di High Performance Computing (HPC), Co-evolution, Novelty
+ }
+ \\[-.5em]
+ \itm{}{Machine Learning}{
+  \di Artificial Neural Networks (ANN) \\
+  \di Composite Pattern-Producing Networks (CPPN) \\
+  \di Cartesian Genetic Programming (CGP) \\
+  \di Genetic Regulatory Networks (GRN) \\
+  \di Hidden Markov Models (HMM)
+ }
+%  \\[-.5em]
+\end{sect}
+% \newpage
+
+\def\ritm#1{\hfill\emph{#1}}
+\def\teachings{\En{Teachings}\Fr{Enseignements}}
+\ok
+\begin{sect}{\teachings}
+%  \itm{}{}{Academic title and current position}
+
+ \itm{\En{Course management}\Fr{Responsable d'UE}}{2021-2022}{
+  \UnivCapitoleShort{} \& \UnivUPS \\  
+  \di Computer Science projects \ritm{72h} \\
+  {\small\emph{Multi-Agent Systems, Complex Systems, Simulation}} \\
+  \di R programming \ritm{67.5h} \\
+  {\small\emph{English lectures}} \\
+  \di Information theory \ritm{22.5h} \\
+  \di Servers and contents \ritm{18.75h} \\
+ }
+ \\
+ 
+ \itm{\En{Teaching fellow}\Fr{Charg\'e de TD}}{2017-2021}{
+  \UnivCapitoleShort{} \& \UnivUPS \\
+  \di Statistical software (R \& Python) \ritm{36h} \\
+  \di Algorithms \ritm{60h} \\
+  \di Excel \& VBA \ritm{60h} \\
+  \di Modeling in databases \ritm{21h} \\
+ }
+ \\
+ 
+ \itm{\En{Practical work supervisor}\Fr{Charg\'e de TP}}{2016-2021}{
+  \UnivUPS \\
+  \di \En{Software projects}\Fr{Projet Logiciel} \ritm{69.2h} \\
+  \di \En{Data structures}\Fr{Structure de donn\'ees} \ritm{18.8h} \\
+  \di \En{C Programming}\Fr{Programmation C} \ritm{36h} \\
+  \di Python \ritm{8h}
  }
 \end{sect}
 
-% **Manual** layout alteration
-% \Fr{\newpage}
+\begin{sect}{Outreach}
+ \itm{EduMix Aspi-Friendly}{2021}{
+  Initiated a project for the self-monitoring of well-being in students with autistic disorders alongside a heterogeneous team of neuro-(a)typical and various profiles (faculty, designers, developers ...).
+ }
+%  \itm{}{2021}{Internship 3eme}\\
+\end{sect}
 
-\def\teachings{\En{Teachings}\Fr{Enseignements}}
-\def\internship{\En{Internship}\Fr{Stage}}
+% \newpage
+
+\def\internship{\En{Internship}\Fr{Stage}s}
 \def\months{\En{months}\Fr{mois}}
-\begin{sect}{\En{Experience}\Fr{Exp\'erience}}
- \itm{\En{Teachings}\Fr{Enseignements}}{2021-2022}{%
-  \UnivCapitoleShort \\
-  \di L3 \En{Projects monitoring, Server and contents}%
-         \Fr{Encadrement de projets, Serveur et contenu}%
-  \\
-  \di M1 \En{R programming, Python}%
-         \Fr{Programmation en R, Python}%
-  \\
- }
- \En{\\}
- 
- \itm{\teachings}{2021}{%
-  \UnivUPSShort \\
-  \di L1 \En{C \& Python programmation, Information theory}%
-         \Fr{Programmation C \& Python, Th\'eorie de l'information}%
-  \\
-  \di L2 \En{Data structures in C, Projects monitoring}%
-         \Fr{Structure de donn\'ees (C), Encadrement de projets}%
-  \\
- }
- \\
- 
- \itm{\teachings}{2017 - 2019}{
-  \UnivCapitoleShort \\
-  \di L2 \En{Excel and VBA, Algorithmic}%
-         \Fr{Excel et VBA, Algorithmes}%
-  \\
-  \di L3 \En{Database Modeling}%
-         \Fr{Mod\'elisation en Base de donn\'ees}%
-  \\
- }
- \\
- 
- \itm{\En{Teachings}\Fr{Enseignements}}{2016 - 2017}{%
-  \UnivUPSShort \\
-  \di L2 \En{Projects monitoring}%
-         \Fr{Encadrement de projets de programmation en C}%
-  \\
- }
- \\
- 
- \itm{\internship}{2016 (6 \months)}{%
+\ok
+\begin{sect}{\internship}
+ \itm{Morphogenetic Engineering}{2016 (6 \months)}{%
   \En{Toulouse Research Institute on Computer Science (IRIT)}%
   \Fr{Institut de Recherche en Informatique de Toulouse (IRIT)}%
     , France \\%
@@ -303,11 +416,11 @@
     \En{Deployed rule-based genomes on the MecaCell platform to study artificial plant growth and cell specialization.}%
     \Fr{D\'eploiement de g\'enomes \`a base de r\`egles sur la plateforme MecaCell pour \'etudier la croissance de plantes et la sp\'ecialisation cellulaire.}%
   } \\
-  \textbf{Contact:} Pr. Y. Duthen (\mailto{Yves.Duthen@irit.fr})
+  \textbf{Contact:} Pr. Y. Duthen (\mailto{yves.duthen@irit.fr})
  }
  \\
  
- \itm{\internship}{2015 (3 \months)}{
+ \itm{Machine Learning}{2015 (3 \months)}{
   IRIT, \emph{%
     \En{``Comparison of different evolutionary approaches, an application to the GECCO 2015 challenge''}%
     \Fr{``Comparaison d'approches \'evolutionnaires, une application au challenge GECCO 2015''}%
@@ -316,11 +429,11 @@
     \En{Performed a performance comparison (accuracy, efficiency) between Artificial Neural and Genetic Regulatory Networks on the 2015 GECCO temperature prediction challenge data.}%
     \Fr{\'Etude sur les diff\'erences de performance entre R\'eseaux de Neurones Artificiels et R\'eseaux de R\'egulation G\'en\'etiques sur des donn\'ees de pr\'ediction de temp\'erature.}%
   } \\
-  \textbf{Contact:} Pr. H. Luga (\mailto{Herve.Luga@irit.fr})
+  \textbf{Contact:} Pr. H. Luga (\mailto{herve.luga@irit.fr})
  }
  \\
  
- \itm{\internship}{2014 (2 \months)}{
+ \itm{Machine Learning}{2014 (2 \months)}{
   IRIT, \emph{%
     \En{``An architecture for automated bird discrimination''}%
     \Fr{``Architecture pour la discrimination automatique d'oiseaux''}%
@@ -329,46 +442,48 @@
     \En{Applied Hidden Markov Models to the BirdClef2014 challenge on the identification of specific bird species in a corpus of thousands of recordings.}%
     \Fr{Application de Mod\`eles de Markov Cach\'es au challenge BirdClef2014 pour l'identification d'esp\`eces d'oiseaux dans un large corpus.}%
   } \\
-  \textbf{Contact:} Pr. J. Farnias (\mailto{Jerome.Farinas@irit.fr})
+  \textbf{Contact:} Pr. J. Farinas (\mailto{jerome.farinas@irit.fr})
  }
 \end{sect}
-
-\newcommand{\formatskill}[2]{\skilldisk{#2} \small#1}
-\def\cols(#1)#2{%
- \itm{#1}{}{%
-  \foreach \p/\l in {#2} {%
-   \begin{minipage}{.32\rwidth}\formatskill{\l}{\p}\end{minipage}%
-  }%
- }%
-}
-\begin{sect}{\En{Skills}\Fr{Comp\'etences}}
- \cols(\En{Programming}\Fr{\small Programmation}){%
-  90/\cpp,
-  80/{C, Java},
-  70/Python}%
-  
- \cols(\En{Processing}\Fr{Traitement}){%
-  90/{Bash (sed, awk ...)},
-  85/Gnuplot,
-  70/{Octave/Matlab}
+\ok
+\begin{sect}{\En{Education}\Fr{\'Education}}
+ \itm{\En{PhD}\Fr{Doctorat}}{2016 - 2020}{%
+  \UnivCapitole
+  \\
+  Defended the 15th of July 2020
+  \\
+  \En{Thesis title: \emph{``Environment-driven speciation: long term interactions in artificial plant communities''}}
+  \Fr{Th\`ese: \emph{``Sp\'eciation guid\'ee par l'environnement: interactions \`a long terme de communaut\'es de plantes artificielles''}}
+  \\
+  {\small%
+    \En{Investigated how complexification of artificial creatures could be further enhanced through the indirect control provided by a co-evolved, highly dynamical environment.}%
+    \Fr{\'Etude sur la mani\`ere dont la complexification de cr\'eatures artificielles pourrait \^etre am\'elior\'ee gr\^ace au contr\^ole indirect exerc\'e par un environnement hautement dynamique et conjointement \'evolu\'e.}%
+  } \\
+  \textbf{Rapporteurs:} Pr. P. Collet \& DoR. F. Vico \\
+  \textbf{Contact:} Pr. Y. Duthen (\mailto{yves.duthen@irit.fr})
  }
+ \\
+   
+ \itm{Master}{2014 - 2016}{
+  \UnivUPS{} (\emph{with honours})
+  \\
+  {\small%
+    \En{Artificial Intelligence: mathematical \& symbolic models, training methods}%
+    \Fr{Intelligence Artificielle: mod\`eles math\'ematiques et symboliques, m\'ethodes d'entra\^inement}
+  }
+ }
+ \\
  
- \cols(\En{Redaction}\Fr{R\'edaction}){%
-  85/{\LaTeX /Ti\textit{k}Z},
-  75/Office Software
- }
- 
- \cols(\En{Systems}\Fr{Syst\`emes}){%
-  85/Linux,
-  70/{Windows, Android}
- }
-
- \cols(\En{Languages}\Fr{Langues}){%
-  95/\En{French}\Fr{Fran\c cais},
-  90/\En{English}\Fr{Anglais}
+ \itm{\En{Bachelor}\Fr{Licence}}{2011 - 2014}{
+  \UnivUPSShort{} (\emph{with distinction})
+  \\
+  {\small%
+    \En{Computer Science: networks, programming, systems, mathematics}%
+    \Fr{Informatique: r\'eseaux, programmation, syst\`emes, math\'ematiques}
+  }
  }
 \end{sect}
- 
+\ok
 \begin{sect}{\En{Scholarships and Fellowships}%
              \Fr{Bourses}}
              
@@ -386,7 +501,16 @@
      {\En{Merit Scholarship from the Regional Student Welfare Office (CROUS, Toulouse) - over 2 years}%
       \Fr{Bourses de m\'erite (CROUS, Toulouse) - sur 2 ans}}
 \end{sect}
+% \newpage
 
+% ========================================
+
+% **Manual** layout alteration
+% \Fr{\vspace{2\baselineskip}}
+
+\ok
+\small
+\renewcommand*{\bibfont}{\normalfont\small}
 \begin{sect}[]{\En{Research Output}%
                \Fr{Production Scientifique}}
  \multicolumn{1}{m{\lwidth}}{} & \multicolumn{1}{m{\rwidth-11.6pt}}{} \\*
@@ -395,10 +519,17 @@
 \nocite{*}%
 % \textbf{\publipending}
 % \printbibliography[heading=none, type=unpublished]
-\textbf{\publipeerreviewed}
-\printbibliography[heading=none, nottype=thesis, nottype=misc, nottype=unpublished]
+\textbf{\publijournal}
+\printbibliography[heading=none, subtype=journal]
+\En{\newpage}
+\textbf{\publiconference}
+\printbibliography[heading=none, subtype=conference]
+\textbf{\publiworkshop}
+\printbibliography[heading=none, subtype=workshop]
+\textbf{\publiposter}
+\printbibliography[heading=none, subtype=poster]
 \textbf{\publioral}
-\printbibliography[heading=none, nottype=unpublished, subtype=talk]
+\printbibliography[heading=none, subtype=talk]
 \textbf{\publithesis}
 \printbibliography[heading=none, type=thesis]
 

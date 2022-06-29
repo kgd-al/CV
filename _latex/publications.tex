@@ -18,20 +18,8 @@
 
 \begin{multicols}{2}
 \small 
-% \section*{\publipending}
-% \printbibliography[heading=none, type=unpublished]
-% 
-% \section*{\publipeerreviewed}
-% \printbibliography[heading=none, nottype=thesis, nottype=misc, nottype=unpublished]
-% 
-% \section*{\publioral}
-% \printbibliography[heading=none, nottype=unpublished, subtype=talk]
-% 
-% \section*{\publithesis}
-% \printbibliography[heading=none, type=thesis]
-
-\foreach \subtype/\en/\fr in \publiclasses {
- \section*{\En{\en}\Fr{\fr}}
+\foreach \subtype/\text in \publiclasses {
+ \section*{\text}
  \printbibliography[heading=none, subtype=\subtype] 
 }
 \end{multicols}
