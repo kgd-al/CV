@@ -68,13 +68,20 @@ then
     sed 's|\(https://vimeo.*\)},|},\n  addendum = {{Presentation}: \\url{\1}},|' |
     sed 's/\(url = {.*\) .*}/\1}/' | 
     sed 's/{\\_}/_/g' > cv.bib
-  echo "Extracted publications from $library"
-  echo
+  r=$?
+  if [ $r -eq 0 ]
+  then
+    echo "Extracted publications from $library"
+    echo
+  else
+    echo "Failed to extract publications from $library"
+    exit 2
+  fi
 fi
 
 # exit 42
 
-for l in misc/academicons_rgate
+for l in misc/academicons_rgate misc/academicons_gscholar
 do
   if [ ! -f $l.pdf ]
   then
