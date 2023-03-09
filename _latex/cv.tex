@@ -54,6 +54,7 @@
                                                                                            \Fr{Version \`a jour (Anglais)}}}
  \fancyfoot[R]{\fancysize \footnotesize Page \thepage\ \En{of}\Fr{sur} \pageref*{LastPage}}
 }
+\fancyfoot{}
 
 \renewcommand{\headrulewidth}{0pt}
 \pagestyle{fancy}
@@ -155,6 +156,9 @@
 }
 \def\UnivCapitole{\UnivCapitoleShort, France}
 % ========================================
+\def\UnivVUShort{Vrije Universiteit Amsterdam}
+\def\UnivVU{\UnivVUShort, The Netherlands}
+% ========================================
 
 % ========================================
 % Format skills
@@ -193,12 +197,12 @@
   \centering\begin{tabular}[t]{c@{ }m{.35\textwidth}c@{ }m{.3\textwidth}}
    \faEnvelopeO & \mailto{k.j.m.godin-dubois@vu.nl}
      & \faGithub & \href{https://github.com/kgd-al}{kgd-al@github.com} \\                       
-   \faHome & Vrije Universiteit Amsterdam
+   \faHome & \UnivVUShort
      & \faVimeo & \href{https://vimeo.com/godinduboisalife}{godinduboisalife} \\
-           & Amsterdam       
+           & de Boelelaan 1081a, 1081HV
      & \includegraphics{misc/academicons_gscholar}
        & \href{https://scholar.google.com/citations?user=8k1MH20AAAAJ}{Google Scholar} \\
-           & The Netherlands
+           & Amsterdam, The Netherlands
      & \includegraphics{misc/academicons_rgate}
        & \href{https://www.researchgate.net/profile/Kevin-Godin-Dubois}{ResearchGate}
   \end{tabular}
@@ -236,16 +240,38 @@
   4 international workshops short submissions (\emph{ALife, ECAL})%\\
 %   1 poster (\emph{ALife})
  }
+ \\[.5em]
+ 
+ \itm{Positions}{}{}
  \\[-.5em]
  
- \itm{}{\En{Thesis}}{%
+ \itm{{\normalfont Postdoctoral}}{\emph{2022 - Present}}{%
+  Computer Science / Evolutionary Robotics \\
+  \emph{``NeuroEvolution and Reinforcement Learning for Embodied Robots''} \\
+  Computational Intelligence Group - \UnivVU \\
+  Supervisors: Dr. K. Miras \hfill(\mailto{k.dasilvamirasdearaujo@vu.nl}) \\
+  \phantom{Supervisors: }Dr. D. Mocanu \hfill(\mailto{d.c.mocanu@utwente.nl})
+ }
+ \\[.5em]
+ 
+ \itm{{\normalfont Postdoctoral}}{\emph{2020 - 2022}}{%
+  Computer Science / Artificial Intelligence \\
+  \emph{``Emergent cognitive architectures in virtual embodied robots''} \\
+  REVA Team, IRIT - \UnivCapitole \\
+  Supervisors: Pr. Y. Duthen \hfill(\mailto{yves.duthen@irit.fr}) \\
+  \phantom{Supervisors: }Pr. S. Cussat-Blanc \hfill(\mailto{sylvain.cussat-blanc@irit.fr})
+ }
+ \\[.5em]
+ 
+ \itm{\normalfont PhD}{\emph{2016-2020}}{%
   Computer Science / Artificial Life \\
   \emph{``Environment-driven speciation: long term interactions in artificial plant communities''} \\
   REVA Team, IRIT - \UnivCapitole \\
   Supervisors: Pr. Y. Duthen \hfill(\mailto{yves.duthen@irit.fr}) \\
   \phantom{Supervisors: }Pr. S. Cussat-Blanc \hfill(\mailto{sylvain.cussat-blanc@irit.fr})
  }
- \\[.5em]
+%  \\[.5em]
+ \newpage
  
  \itm{\En{Teaching}}{}{5 years (492 hours)}
  \\[-.5em]
@@ -261,7 +287,7 @@
   Data Science tools and languages \\
   Database modeling, SQL
  }
- \\[.5em]
+ \\[.25em]
  
  \itm{Skills}{}{}
  \itm{}{Programming}{
@@ -272,7 +298,7 @@
  \\[-.75em]
  \itm{}{Languages}{French (Mother tongue), English (Fluent - 980/990 at the TOEIC)}
 \end{sect}
-\newpage
+% \newpage
 
 \newcommand{\ritm}[5]{%
  \itm{}{%
@@ -338,7 +364,7 @@
   \sref{https://github.com/kgd-al/Splinoids}{Splinoids} \hfill 
   \sref[Videos]{https://vimeo.com/showcase/9613894}{on Vimeo} \hfill\null
  }
-%  \\[.5em]
+ \\[.5em]
 
  \itm{Expertise}{}{}
  \\[-.5em]
@@ -374,7 +400,7 @@
   \di Information theory \ritm{22.5h} \\
   \di Servers and contents \ritm{18.75h} \\
  }
- \\
+ \\[-.5em]
  
  \itm{\En{Teaching fellow}\Fr{Charg\'e de TD}}{2017-2021}{
   \UnivCapitoleShort{} \& \UnivUPS \\
@@ -383,7 +409,7 @@
   \di Excel \& VBA \ritm{60h} \\
   \di Modeling in databases \ritm{21h} \\
  }
- \\
+ \\[-.5em]
  
  \itm{\En{Practical work supervisor}\Fr{Charg\'e de TP}}{2016-2021}{
   \UnivUPS \\
@@ -524,7 +550,7 @@
 % \printbibliography[heading=none, type=unpublished]
 \textbf{\publijournal}
 \printbibliography[heading=none, subtype=journal]
-\En{\newpage}
+% \En{\newpage}
 \textbf{\publiconference}
 \printbibliography[heading=none, subtype=conference]
 \textbf{\publiworkshop}
