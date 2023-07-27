@@ -54,7 +54,7 @@
                                                                                            \Fr{Version \`a jour (Anglais)}}}
  \fancyfoot[R]{\fancysize \footnotesize Page \thepage\ \En{of}\Fr{sur} \pageref*{LastPage}}
 }
-\fancyfoot{}
+\fancyfoot[C]{Page \thepage \En{of}\Fr{sur} \pageref*{LastPage}}
 
 \renewcommand{\headrulewidth}{0pt}
 \pagestyle{fancy}
@@ -249,8 +249,11 @@
   Computer Science / Evolutionary Robotics \\
   \emph{``NeuroEvolution and Reinforcement Learning for Embodied Robots''} \\
   Computational Intelligence Group - \UnivVU \\
-  Supervisors: Dr. K. Miras \hfill(\mailto{k.dasilvamirasdearaujo@vu.nl}) \\
-  \phantom{Supervisors: }Dr. D. Mocanu \hfill(\mailto{d.c.mocanu@utwente.nl})
+  \begin{tabular}{@{}r@{ }l@{}}
+   Supervisor:   & Dr. K. Miras \hfill(\mailto{k.dasilvamirasdearaujo@vu.nl}) \\
+  Collaborators: & Dr. D. Mocanu \hfill(\mailto{d.c.mocanu@utwente.nl}) \\
+                 & Dr. A. Kononova \hfill(\mailto{a.kononova@liacs.leidenuniv.nl}) \\
+  \end{tabular}
  }
  \\[.5em]
  
@@ -273,10 +276,11 @@
 %  \\[.5em]
  \newpage
  
- \itm{\En{Teaching}}{}{5 years (492 hours)}
+ \itm{\En{Teaching}}{}{6 years (507 hours)}
  \\[-.5em]
  
  \itm{}{Computer\\ Science}{
+  Learning Machines Master 2 Projects \\
   Programming languages: Python, C, R \\
   Algorithms, Data Structures, Information theory \\
   Programming projects
@@ -375,11 +379,12 @@
  }
  \\[-.5em]
  \itm{}{Machine Learning}{
-  \di Artificial Neural Networks (ANN) \\
+  \di Artificial Neural Networks (ANN, CNN, RNN) \\
   \di Composite Pattern-Producing Networks (CPPN) \\
   \di Cartesian Genetic Programming (CGP) \\
   \di Genetic Regulatory Networks (GRN) \\
-  \di Hidden Markov Models (HMM)
+  \di Hidden Markov Models (HMM) \\
+  \di Stable baselines 3
  }
 %  \\[-.5em]
 \end{sect}
@@ -390,6 +395,13 @@
 \ok
 \begin{sect}{\teachings}
 %  \itm{}{}{Academic title and current position}
+
+ \itm{\En{M2 Projects}\Fr{Projets M2}}{2023}{
+  \UnivVUShort \\
+  \di Learning Machines \ritm{15h} \\
+  \di Master/Bachelor thesis supervision \\
+ }
+ \\[-.5em]
 
  \itm{\En{Course management}\Fr{Responsable d'UE}}{2021-2022}{
   \UnivCapitoleShort{} \& \UnivUPS \\  
@@ -421,13 +433,14 @@
 \end{sect}
 
 \begin{sect}{Outreach}
+ \itm{Reviewer}{2023}{
+  \di Symposium on Artificial Life program comitee member \\
+  \di Journal of Open Source Software reviewer
+ }\\
  \itm{EduMix Aspi-Friendly}{2021}{
   Initiated a project for the self-monitoring of well-being in students with autistic disorders alongside a heterogeneous team of neuro-(a)typical and various profiles (faculty, designers, developers ...).
  }
-%  \itm{}{2021}{Internship 3eme}\\
 \end{sect}
-
-% \newpage
 
 \def\internship{\En{Internship}\Fr{Stage}s}
 \def\months{\En{months}\Fr{mois}}
@@ -474,6 +487,8 @@
   \textbf{Contact:} Pr. J. Farinas (\mailto{jerome.farinas@irit.fr})
  }
 \end{sect}
+
+\newpage
 \ok
 \begin{sect}{\En{Education}\Fr{\'Education}}
  \itm{\En{PhD}\Fr{Doctorat}}{2016 - 2020}{%
